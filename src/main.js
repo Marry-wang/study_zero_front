@@ -13,6 +13,23 @@ Vue.use(ElementUI,{locale});
 Vue.prototype.$axios = axios 
 
 
+
+router.beforeEach((to,from,next)=>{
+  console.log(to);
+  console.log(from);
+  if(to.path=="/"){
+    next();
+  }else if(to.path=="/hello"){
+    next();
+  }else if(to.path=="/demo1"){
+    next();
+  }else if(to.path=="/demo2"){
+    next();
+  }else{
+    next({path:"/"});
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -20,3 +37,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
