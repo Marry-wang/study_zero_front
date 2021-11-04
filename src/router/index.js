@@ -5,6 +5,8 @@ import One from '@/components/One'
 import Demo1 from '@/components/view/Demo1'
 import Demo2 from '@/components/view/Demo2'
 
+import login from './login'
+
 Vue.use(Router)
 
 export default new Router({
@@ -32,6 +34,7 @@ export default new Router({
       path: '/demo2',
       name: 'Demo2',
       component: Demo2
-    }
+    },
+    ...login
   ]
 })
