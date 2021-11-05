@@ -38,14 +38,8 @@ export default {
             )
         },
         getName(){
-            this.$axios({
-                method:'get',
-                url:'/demo/jwt/getUserInfo',
-                headers: {
-                    token: sessionStorage.getItem('token')
-                }
-            }).then((response) =>{     
-                this.name =  response.data.data  
+            userName().then((response) =>{     
+                this.name =  response.data
                 window.console.log(response);   
             }).catch((error) =>
                 window.console.log(error)       
