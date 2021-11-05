@@ -12,10 +12,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/apis': {
-        target: 'http://localhost:8001/',//
+        target: 'http://localhost:8001',//
         changeOrigin: true,
         pathRewrite: {
-          '^/apis': '/'  //后面有没有apis，要注意下（①，②）
+          '^/apis': ''  //后面有没有apis，要注意下（①，②）
         }
       }
 

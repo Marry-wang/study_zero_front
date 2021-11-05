@@ -7,6 +7,7 @@
     </div>
 </template>
 <script>
+import {loginT,userName} from '@/api/login/login';
 export default {
     data(){
         return{
@@ -19,11 +20,16 @@ export default {
     },
     methods:{
         login(){
-            this.$axios({
-                method:'get',
-                url:'/apis/demo/jwt/login?userName=""&passWord=""',
-            }).then((response) =>{     
-                this.msg =  response.data.data  
+            // this.$axios({
+            //     method:'get',
+            //     url:'/demo/jwt/login?userName=""&passWord=""',
+            // })
+            let params={
+                userName:'',
+                passWord:''
+            }
+            loginT().then((response) =>{     
+                this.msg =  response.data
                 sessionStorage.setItem('token',this.msg);
                 window.console.log(response);   
             }).catch((error) =>
@@ -34,7 +40,7 @@ export default {
         getName(){
             this.$axios({
                 method:'get',
-                url:'/apis/demo/jwt/getUserInfo',
+                url:'/demo/jwt/getUserInfo',
                 headers: {
                     token: sessionStorage.getItem('token')
                 }
