@@ -14,6 +14,19 @@ import Qs from 'qs'
 //设置请求超时时间
 axios.defaults.timeout = 10000
 
+//将token带入请求头中
+axios.interceptors.request.use(function(config) {
+    let token = sessionStorage.getItem('token')
+    if (token) { 
+        config.headers['token'] =  token
+    }
+    return config
+}, function(error) {
+    return Promise.reject(error)
+})
+
+
+
 /**
  * get方法，对应get请求
  * @param {String} url [请求的url地址]
@@ -42,6 +55,7 @@ export function get (url, params){
  * @param {Object} params [请求时携带的参数]
  */
 export function post (url,params){
+    console.log(sessionStorage.getItem('token'))
     return new Promise((resolve,reject)=>{
         axios.post(url,Qs.stringify(params))
         .then(res =>{
