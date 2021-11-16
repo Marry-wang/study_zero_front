@@ -16,9 +16,9 @@ axios.defaults.timeout = 10000
 
 //将token带入请求头中
 axios.interceptors.request.use(function(config) {
-    let token = sessionStorage.getItem('token')
+    let token = sessionStorage.getItem('accessToken')
     if (token) { 
-        config.headers['token'] =  token
+        config.headers['accessToken'] =  token
     }
     return config
 }, function(error) {
@@ -26,7 +26,6 @@ axios.interceptors.request.use(function(config) {
 })
 //响应拦截
 axios.interceptors.response.use(function(response) {
-    console.log(response)
     if(response.status == 200){
         if(response.data.code !=200){
             Vue.prototype.$message.error(response.data.message)
@@ -34,7 +33,6 @@ axios.interceptors.response.use(function(response) {
     }
     return response
 }, function(error) { //登录失败异常
-    console.log(error)
     if (error.request) {
         if (error.request.status == 401) {
             Vue.prototype.$message.error('未授权，请重新登录')
@@ -61,11 +59,12 @@ axios.interceptors.response.use(function(response) {
 export function get (url, params){
     return new Promise((resolve,reject) =>{
         axios.get(url,{
-            params: params
-        }).then(res =>{
+            data: params
+        },{headers:{'Content-Type':"application/json;charset=utf-8"}}
+        ).then(res =>{
             resolve(res.data)
             Loading.service(true).close()
-            Message({message:'请求成功',type:'success'})
+            // Message({message:'请求成功',type:'success'})
             return res
         }).catch(err =>{
             reject(err.data)
@@ -81,13 +80,13 @@ export function get (url, params){
  * @param {Object} params [请求时携带的参数]
  */
 export function post (url,params){
-    console.log(sessionStorage.getItem('token'))
+    // console.log(sessionStorage.getItem('token'))
     return new Promise((resolve,reject)=>{
-        axios.post(url,Qs.stringify(params))
+        axios.post(url,{data:Qs.stringify(params)},{headers:{'Content-Type':"application/json;charset=utf-8"}})
         .then(res =>{
             resolve(res.data)
             Loading.service(true).close()
-            Message({message:'请求成功',type:'success'})
+            // Message({message:'请求成功',type:'success'})
             return res.data
         })
         .catch(err =>{
