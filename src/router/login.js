@@ -2,7 +2,7 @@ import Login from '@/components/view/backend/Login'
 
 export default[
     {
-        path: '/login',
+        path: '/',
         component: Login
     }
 ]
