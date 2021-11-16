@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-#app {
+/* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,5 +35,5 @@ export default {
       #54f989, 
       #5ffb6d
     );
-}
+} */
 </style>
