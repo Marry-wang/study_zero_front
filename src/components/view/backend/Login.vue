@@ -97,10 +97,15 @@ export default {
                 }
             })
             .then((response) =>{     
-                this.msg =  response.data.data
-                sessionStorage.setItem('accessToken',this.msg);
-                console.log(sessionStorage.getItem('accessToken'))
-                this.$router.push('/one')
+                this.$axios.post("/demo/loginTo",this.form).then(res=>{
+                    this.msg =  response.data.data
+                    sessionStorage.setItem('accessToken',this.msg);
+                    console.log(sessionStorage.getItem('accessToken'))
+                    this.$router.push('/menu')
+                }).catch(res=>{
+                    console.log(res)
+                })
+                
                 // window.console.log(response);   
             }).catch((error) =>
                 window.console.log(error)       
@@ -129,5 +134,7 @@ export default {
 }
 </script>
 <style scope>
-
+#login{
+    text-align: center;
+}
 </style>
