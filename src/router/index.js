@@ -6,6 +6,7 @@ import Demo1 from '@/components/view/Demo1'
 import Demo2 from '@/components/view/Demo2'
 
 import login from './login'
+import menu from './menu'
 
 Vue.use(Router)
 
@@ -35,6 +36,7 @@ export default new Router({
       name: 'Demo2',
       component: Demo2
     },
-    ...login
+    ...login,
+    ...menu
   ]
 })

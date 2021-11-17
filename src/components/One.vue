@@ -14,8 +14,9 @@ export default {
   }
 }
 </script>
-<style>
-    #app {
+<style scoped>
+    #one {
+        text-align: center;
         width: 1000pm;
         height: 1000pm;
         background-image: 
