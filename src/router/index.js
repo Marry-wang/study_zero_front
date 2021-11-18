@@ -16,26 +16,26 @@ export default new Router({
    */
   mode: 'history', 
   routes: [
-    {
-      path: '/one',
-      name: 'One',
-      component: One
-    },
-    {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/demo1',
-      name: 'Demo1',
-      component: Demo1
-    },
-    {
-      path: '/demo2',
-      name: 'Demo2',
-      component: Demo2
-    },
+    // {
+    //   path: '/one',
+    //   name: 'One',
+    //   component: One
+    // },
+    // {
+    //   path: '/hello',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld
+    // },
+    // {
+    //   path: '/demo1',
+    //   name: 'Demo1',
+    //   component: Demo1
+    // },
+    // {
+    //   path: '/demo2',
+    //   name: 'Demo2',
+    //   component: Demo2
+    // },
     ...login,
     ...menu
   ]

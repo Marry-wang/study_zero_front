@@ -21,12 +21,14 @@
                             <!-- @keydown.enter.native="doLogin"当按下enter键的时候也会执行doLogin方法-->
                             </td>
                         </tr>
-                        <tr>
+                        <tr >
                             <!-- 占两行-->
-                            <td colspan="2">
+                            <td colspan="2" >
                             <!-- 点击事件的两种不同的写法v-on:click和 @click-->
                             <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
-                                <el-button style="width: 300px" type="primary" @click="login">登录</el-button>
+                            
+                            <el-button style="width: 350px;margin-top: 20px" type="primary" @click="login">登录</el-button>
+                            
                             <!-- <el-button @click="getName()">用户名:{{name}}</el-button> -->
                             </td>
                         </tr>
