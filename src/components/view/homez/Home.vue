@@ -45,7 +45,7 @@
             @tab-click="clickTab"
             >
               <el-tab-pane v-for="(item, index) in Tabs" 
-              :key="index" 
+              :key="item.name" 
               :label="item.title" 
               :name="item.name"
               >
