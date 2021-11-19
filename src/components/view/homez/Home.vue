@@ -12,15 +12,25 @@
         <!-- 侧边栏容器 -->
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
           <el-menu 
+           :router="true"
+           :default-active="$router.apth"
+          >
+            <el-menu-item index="/home">首页</el-menu-item>
+          </el-menu>
+
+          <el-menu 
             :default-active="this.$route.path" 
             router
+            :unique-opened="true"
+            @open="handleOpen"
+            @close="handleClose"
           >
-            <el-submenu :index="menu.menuName" v-for="(menu , index ) in menuList" :key="index" >
+            <el-submenu :index="menu.menuName"  v-for="(menu , index ) in menuList" :key="index" >  
                 <template slot="title">
                   <i :class="menu.icon"></i>
                   <span>{{menu.menuName}}</span>
                 </template>
-                <el-menu-item :index="menuC.path" v-for="(menuC,indexs) in menu.children" :key="indexs"> 
+                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" @click="addtab(menuC)"> 
                   <i :class="menuC.icon"></i>
                   {{menuC.menuName}}
                 </el-menu-item>
@@ -30,15 +40,22 @@
 
         <el-container>
           <div>
-            <el-breadcrumb separator="/">
-              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              
-            </el-breadcrumb>  
-          </div>
+            <el-tabs v-model="TabsValue" type="card" closable
+            @tab-remove="removeTab"
+            @tab-click="clickTab"
+            >
+              <el-tab-pane v-for="(item, index) in Tabs" 
+              :key="index" 
+              :label="item.title" 
+              :name="item.name"
+              >
+              </el-tab-pane>
+            </el-tabs>
+          
           <!-- 主要容器区域 -->
-          <div>
+          
             <el-main>
-              
+              <router-view/>
             </el-main>
           </div>
         </el-container>
@@ -50,6 +67,8 @@
   export default {
     data() {
       return {
+        TabsValue:'',
+        Tabs:[],
         menuList:[
           {
             menuName:'第一级',
@@ -57,10 +76,10 @@
             icon:'el-icon-location',
             children:[
               {
-                menuName:'helolo world',path:'/hello',icon:'el-icon-s-marketing',
+                menuName:'用户管理',path:'/mesageUser',icon:'el-icon-s-marketing',
               },
               {
-                menuName:'登录',path:'/',icon:'el-icon-s-opportunity',
+                menuName:'角色管理',path:'/mesageRoule',icon:'el-icon-s-opportunity',
               }
             ]
           },
@@ -70,15 +89,78 @@
             icon:'el-icon-star-off',
             children:[
               {
-                menuName:'登录',path:'/',icon:'el-icon-umbrella',
+                menuName:'菜单管理',path:'/mesageMenu',icon:'el-icon-umbrella',
               }
             ]
           }
         ]
       }
     },
+    mounted(){
+        let tab1={
+          title: '首页',
+          name: '/home',
+          content:'',
+        }
+        this.Tabs.push(tab1);
+    },
     methods: {
-      
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      addtab(params){
+        let tab={
+          title: params.menuName,
+          name: params.path,
+          content:'',
+        }
+        let tabNum =0;
+        for( let i = 0; i< this.Tabs.length;i++) { 
+          if(this.Tabs[i].title ==params.menuName ){
+                tabNum=tabNum+1;
+            }
+        }
+        if(tabNum ==0){
+          this.Tabs.push(tab);
+        }
+        
+      },
+       removeTab(targetName) {
+        if(targetName !='/home'){
+          let tabs = this.Tabs;
+          let activeName = this.TabsValue;
+          if (activeName === targetName) {
+            tabs.forEach((tab, index) => {
+              
+              if (tab.name === targetName) {
+                let nextTab = tabs[index + 1] || tabs[index - 1];
+                if (nextTab) {
+                  activeName = nextTab.name;
+                }
+              }
+            });
+          }
+          
+          this.TabsValue = activeName;
+          this.Tabs = tabs.filter(tab => tab.name !== targetName);
+          if(this.Tabs.length ==1){
+            this.$router.push({path: "/home"})
+          }else if(this.Tabs.length ==0){
+            let tab1={
+              title: '首页',
+              name: '/home',
+              content:'',
+            }
+            this.Tabs.push(tab1);
+          }
+        }
+      },
+      clickTab (tab) {
+        this.$router.push({path: tab._props.name})
+      }
     },
   };
 </script>

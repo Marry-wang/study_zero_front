@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import One from '@/components/One'
-import Demo1 from '@/components/view/Demo1'
-import Demo2 from '@/components/view/Demo2'
 
 import login from './login'
 import menu from './menu'
@@ -16,27 +12,11 @@ export default new Router({
    */
   mode: 'history', 
   routes: [
-    // {
-    //   path: '/one',
-    //   name: 'One',
-    //   component: One
-    // },
-    // {
-    //   path: '/hello',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
-    // {
-    //   path: '/demo1',
-    //   name: 'Demo1',
-    //   component: Demo1
-    // },
-    // {
-    //   path: '/demo2',
-    //   name: 'Demo2',
-    //   component: Demo2
-    // },
     ...login,
     ...menu
   ]
 })
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
