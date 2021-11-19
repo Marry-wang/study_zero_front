@@ -57,7 +57,7 @@
             icon:'el-icon-location',
             children:[
               {
-                menuName:'helolo world',path:'/one',icon:'el-icon-s-marketing',
+                menuName:'helolo world',path:'/hello',icon:'el-icon-s-marketing',
               },
               {
                 menuName:'登录',path:'/',icon:'el-icon-s-opportunity',
@@ -83,7 +83,7 @@
   };
 </script>
 
-<style scoped>
+<style  scoped>
   .el-header {
     background-color: #B3C0D1;
     color: #333;

@@ -1,6 +1,12 @@
 import Menu from '@/components/view/backend/Menu'
 import Home from '@/components/view/homez/Home'
-import children1 from './children'
+import Index from '@/components/view/homez/Index'
+import HelloWorld from '@/components/HelloWorld'
+import One from '@/components/One'
+import Demo1 from '@/components/view/Demo1'
+import Demo2 from '@/components/view/Demo2'
+
+import Main from '@/components/view/homez/Componts/Main'
 
 export default[
     {
@@ -10,6 +16,29 @@ export default[
     {
         path: '/home',
         component: Home,
-        children: children1,
+    },
+    {
+        path: '/menuIndex',
+        component: Index,
+        redirect:'/demo2',
+        children:[
+            {
+                path: '/demo1',
+                component: Demo1
+              },
+            {
+                path: '/one',
+                component: One,
+            },
+            {
+                path: '/demo2',
+                component: Demo2,
+            },
+            {
+                path: '/hello',
+                component: HelloWorld,
+            },
+            
+        ]
     }
 ]
