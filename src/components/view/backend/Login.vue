@@ -103,7 +103,7 @@ export default {
                     this.msg =  response.data.data
                     sessionStorage.setItem('accessToken',this.msg);
                     console.log(sessionStorage.getItem('accessToken'))
-                    this.$router.push('/menu')
+                    this.$router.push('/home')
                 }).catch(res=>{
                     console.log(res)
                 })
