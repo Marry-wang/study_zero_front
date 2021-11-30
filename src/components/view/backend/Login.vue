@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-import {userName} from '@/api/login/login';
+import {userName,loginT} from '@/api/login/login';
 export default {
     name:"login",
     data(){
@@ -99,9 +99,11 @@ export default {
                 }
             })
             .then((response) =>{     
-                this.$axios.post("/demo/loginTo",this.form).then(res=>{
-                    this.msg =  response.data.data
-                    sessionStorage.setItem('accessToken',this.msg);
+                this.msg =  response.data.data
+                sessionStorage.setItem('accessToken',this.msg);
+                console.log(sessionStorage.getItem('accessToken'))
+                loginT(this.form).then(res=>{
+                    // sessionStorage.setItem('accessToken',this.msg);
                     console.log(sessionStorage.getItem('accessToken'))
                     this.$router.push('/home')
                 }).catch(res=>{
