@@ -124,5 +124,8 @@ export default {
 }
 </script>
 <style scoped>
-
+#add{
+    width: 60%;
+    margin: 0 auto;
+}
 </style>

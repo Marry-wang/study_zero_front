@@ -39,12 +39,13 @@
         </el-aside>
 
         <el-container>
-          <div>
+          <!-- 控制展示屏的大小 -->
+          <div style="width:100%">
             <el-tabs v-model="TabsValue" type="card" closable
             @tab-remove="removeTab"
             @tab-click="clickTab"
             >
-              <el-tab-pane v-for="(item, index) in Tabs" 
+              <el-tab-pane v-for="item in Tabs" 
               :key="item.name" 
               :label="item.title" 
               :name="item.name"
@@ -100,6 +101,9 @@
             children:[
               {
                 menuName:'添加页',path:'/add',icon:'el-icon-umbrella',
+              },
+              {
+                menuName:'展示页',path:'/table',icon:'el-icon-umbrella',
               }
             ]
           }
