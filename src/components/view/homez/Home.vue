@@ -92,6 +92,16 @@
                 menuName:'菜单管理',path:'/mesageMenu',icon:'el-icon-umbrella',
               }
             ]
+          },
+          {
+            menuName:'Element组件',
+            path:'',
+            icon:'el-icon-star-off',
+            children:[
+              {
+                menuName:'添加页',path:'/add',icon:'el-icon-umbrella',
+              }
+            ]
           }
         ]
       }

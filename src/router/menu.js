@@ -6,6 +6,7 @@ import HelloWorld from '@/components/view/other/HelloWorld'
 import One from '@/components/view/other/One'
 import Demo1 from '@/components/view/other/Demo1'
 import Demo2 from '@/components/view/other/Demo2'
+import Add from '@/element/view/addMsg'
 
 import mesageMenu from '@/components/view/backend/message/Menu'
 import mesageRoule from '@/components/view/backend/message/Roule'
@@ -37,6 +38,10 @@ export default[
                 path: '/first',
                 component: First,
             },   
+            {
+                path: '/add',
+                component: Add
+            },
         ]
     },
     {
