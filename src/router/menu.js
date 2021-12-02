@@ -8,6 +8,7 @@ import Demo1 from '@/components/view/other/Demo1'
 import Demo2 from '@/components/view/other/Demo2'
 import Add from '@/element/view/addMsg'
 import Table from '@/element/view/tableShow'
+import Upload from '@/element/view/Fileupload'
 
 import mesageMenu from '@/components/view/backend/message/Menu'
 import mesageRoule from '@/components/view/backend/message/Roule'
@@ -46,6 +47,10 @@ export default[
             {
                 path: '/table',
                 component: Table
+            },
+            {
+                path: '/upload',
+                component: Upload
             },
         ]
     },

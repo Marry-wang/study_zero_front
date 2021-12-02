@@ -104,6 +104,9 @@
               },
               {
                 menuName:'展示页',path:'/table',icon:'el-icon-umbrella',
+              },
+              {
+                menuName:'添加页',path:'/upload',icon:'el-icon-umbrella',
               }
             ]
           }

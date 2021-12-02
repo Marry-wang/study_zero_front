@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-import {userName,loginT} from '@/api/login/login';
+import {userName,loginT,loginform} from '@/api/login/login';
 export default {
     name:"login",
     data(){
@@ -73,33 +73,34 @@ export default {
             // }).catch(res=>{
             //     console.log(res)
             // })
-            this.$axios({
-                method: 'post',
-                url: '/demo/login',
-                data: this.form,
-                // data: {
-                // username: 'user',
-                // password: '1111'
-                // },
-                transformRequest: [
-                    function (data) {
-                        let ret = ''
-                        for (let it in data) {
-                        ret +=
-                            encodeURIComponent(it) +
-                            '=' +
-                            encodeURIComponent(data[it]) +
-                            '&'
-                        }
-                        return ret
-                    }
-                ],
-                headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            // this.$axios({
+            //     method: 'post',
+            //     url: '/demo/login',
+            //     data: this.form,
+            //     // data: {
+            //     // username: 'user',
+            //     // password: '1111'
+            //     // },
+            //     transformRequest: [
+            //         function (data) {
+            //             let ret = ''
+            //             for (let it in data) {
+            //             ret +=
+            //                 encodeURIComponent(it) +
+            //                 '=' +
+            //                 encodeURIComponent(data[it]) +
+            //                 '&'
+            //             }
+            //             return ret
+            //         }
+            //     ],
+            //     headers: {
+            //     'Content-Type': 'application/x-www-form-urlencoded'
+            //     }
+            // })
+            loginform(this.form)
             .then((response) =>{     
-                this.msg =  response.data.data
+                this.msg =  response.data
                 sessionStorage.setItem('accessToken',this.msg);
                 console.log(sessionStorage.getItem('accessToken'))
                 loginT(this.form).then(res=>{
