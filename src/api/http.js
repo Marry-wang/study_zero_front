@@ -139,5 +139,29 @@ export function post (url,params){
         })
     })
 }
+export function postUpload (url,params){
+    // console.log(sessionStorage.getItem('token'))
+    return new Promise((resolve,reject)=>{
+        axios({
+            method: 'post',
+            url: url,
+            data: params,
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(res =>{
+            resolve(res.data)
+            Loading.service(true).close()
+            // Message({message:'请求成功',type:'success'})
+            return res.data
+        })
+        .catch(err =>{
+            reject(err.data)
+            Loading.service(true).close()
+            Message({message:'加载失败',type:'error'})
+        })
+    })
+}
 
 

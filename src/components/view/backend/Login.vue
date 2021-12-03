@@ -102,10 +102,10 @@ export default {
             .then((response) =>{     
                 this.msg =  response.data
                 sessionStorage.setItem('accessToken',this.msg);
-                console.log(sessionStorage.getItem('accessToken'))
+                // console.log(sessionStorage.getItem('accessToken'))
                 loginT(this.form).then(res=>{
                     // sessionStorage.setItem('accessToken',this.msg);
-                    console.log(sessionStorage.getItem('accessToken'))
+                    // console.log(sessionStorage.getItem('accessToken'))
                     this.$router.push('/home')
                 }).catch(res=>{
                     console.log(res)
