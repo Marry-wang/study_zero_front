@@ -1,5 +1,6 @@
 <template>
     <div id="upload">
+        <i>文件上传组件，直接上传</i>
         <el-upload
             action="/apis/demo/file/upload"
             list-type="picture-card"
@@ -12,6 +13,7 @@
         >
         <i class="el-icon-plus"></i>
       </el-upload> 
+      <i>文件上传组件与图片组件，自定义上传</i>
       <el-upload
             action=""
             list-type="picture-card"
