@@ -14,7 +14,7 @@ export default {
     },
     methods:{
         getDemo1Message(){
-            this.$emit("messagew",this.msg)
+            this.$emit("messagew",this.text)
         }
     }
     

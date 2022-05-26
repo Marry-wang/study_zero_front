@@ -41,7 +41,7 @@
         <el-container>
           <!-- 控制展示屏的大小 -->
           <div style="width:100%">
-            <el-tabs v-model="TabsValue" type="card" closable
+            <el-tabs v-model="TabsValue" type="border-card" closable
             @tab-remove="removeTab"
             @tab-click="clickTab"
             >
@@ -52,6 +52,15 @@
               >
               </el-tab-pane>
             </el-tabs>
+            <!-- <el-tag
+              :key="item.title" 
+              v-for="item in Tabs"
+              closable
+              :disable-transitions="false"
+              @click="clickTab"
+              @close="removeTab">
+              {{item.title}}
+            </el-tag> -->
           
           <!-- 主要容器区域 -->
           
@@ -106,7 +115,7 @@
                 menuName:'展示页',path:'/table',icon:'el-icon-umbrella',
               },
               {
-                menuName:'添加页',path:'/upload',icon:'el-icon-umbrella',
+                menuName:'上传页',path:'/upload',icon:'el-icon-umbrella',
               }
             ]
           }
@@ -151,7 +160,6 @@
           let activeName = this.TabsValue;
           if (activeName === targetName) {
             tabs.forEach((tab, index) => {
-              
               if (tab.name === targetName) {
                 let nextTab = tabs[index + 1] || tabs[index - 1];
                 if (nextTab) {
