@@ -18,7 +18,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
   /* background-image: 
     linear-gradient(
       to left bottom, 
@@ -36,4 +36,7 @@ export default {
       #5ffb6d
     ); */
 } 
+.el-tabs--border-card>.el-tabs__content{
+  padding: 0px;
+}
 </style>

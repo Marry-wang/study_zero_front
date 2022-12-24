@@ -58,7 +58,7 @@
               closable
               :disable-transitions="false"
               @click="clickTab"
-              @close="removeTab">
+              @close="removeTab(item.title)">
               {{item.title}}
             </el-tag> -->
           
@@ -155,21 +155,27 @@
         
       },
        removeTab(targetName) {
+        console.log("targetName",targetName)
         if(targetName !='/home'){
           let tabs = this.Tabs;
           let activeName = this.TabsValue;
-          if (activeName === targetName) {
+           console.log("activeName",activeName)
+          // if (activeName === targetName) {
             tabs.forEach((tab, index) => {
               if (tab.name === targetName) {
                 let nextTab = tabs[index + 1] || tabs[index - 1];
+                 console.log("nextTab",nextTab)
                 if (nextTab) {
                   activeName = nextTab.name;
+                  console.log("activeName11",activeName)
+                   this.$router.push({path: activeName})
                 }
               }
             });
-          }
+        //  }
           
           this.TabsValue = activeName;
+          // this.Tabs.splice(this.Tabs.indexOf(targetName), 1);
           this.Tabs = tabs.filter(tab => tab.name !== targetName);
           if(this.Tabs.length ==1){
             this.$router.push({path: "/home"})
@@ -195,6 +201,9 @@
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+  }
+  .el-tabs--border-card>.el-tabs__content{
+    padding: 0px;
   }
   
   .el-aside {
