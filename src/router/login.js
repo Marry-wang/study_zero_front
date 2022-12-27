@@ -1,4 +1,4 @@
-import Login from '@/components/view/backend/Login'
+import Login from '@/components/view/homez/Login'
 
 export default[
     {
