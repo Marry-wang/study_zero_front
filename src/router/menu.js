@@ -2,15 +2,14 @@
 import Home from '@/components/view/homez/Home'
 import First from '@/components/view/homez/First'
 
-import Add from '@/components/view/backend/message/addMsg'
-import Table from '@/components/view/backend/message/tableShow'
-import Upload from '@/components/view/backend/message/Fileupload'
+import Add from '@/components/view/message/addMsg'
+import Table from '@/components/view/message/tableShow'
+import Upload from '@/components/view/message/Fileupload'
+import mesageMenu from '@/components/view/message/Menu'
+import mesageRoule from '@/components/view/message/Roule'
+import mesageUser from '@/components/view/message/User'
 
-import mesageMenu from '@/components/view/backend/message/Menu'
-import mesageRoule from '@/components/view/backend/message/Roule'
-import mesageUser from '@/components/view/backend/message/User'
-
-
+import download from '@/components/view/message/downloadFile'
 export default[
     {
         path: '/home',
@@ -44,6 +43,10 @@ export default[
             {
                 path: '/upload',
                 component: Upload
+            },
+            {
+                path: '/download',
+                component: download
             }
         ]
     }

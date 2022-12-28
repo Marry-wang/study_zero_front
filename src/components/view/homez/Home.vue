@@ -116,6 +116,9 @@
               },
               {
                 menuName:'上传页',path:'/upload',icon:'el-icon-umbrella',
+              },
+              {
+                menuName:'下载页',path:'/download',icon:'el-icon-umbrella',
               }
             ]
           }
