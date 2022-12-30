@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- 外层容器 -->
-    <el-container style="height: 800px; border: 1px solid #eee">
+    <el-container style="height:900px; border: 1px solid #eee">
       <!-- 顶栏容器 -->
       <el-header>
           <span  style="float: left; font-size: 12px">logo</span>
