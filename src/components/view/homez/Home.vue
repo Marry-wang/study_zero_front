@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- 外层容器 -->
-    <el-container style="height:900px; border: 1px solid #eee">
+    <el-container style="height:100vh; border: 0px solid #eee">
       <!-- 顶栏容器 -->
       <el-header>
           <span  style="float: left; font-size: 12px">logo</span>
@@ -10,7 +10,7 @@
         
       <el-container>
         <!-- 侧边栏容器 -->
-        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-aside width="200px"  style="background-color: rgb(238, 241, 246)">
           <el-menu 
            :router="true"
            :default-active="$router.apth"
