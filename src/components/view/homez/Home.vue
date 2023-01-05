@@ -10,7 +10,7 @@
         
       <el-container>
         <!-- 侧边栏容器 -->
-        <el-aside width="200px"  style="background-color: rgb(238, 241, 246)">
+        <el-aside width="200px"  style="background-color: rgb(238, 241, 246);overflow:hidden">
           <el-menu 
            :router="true"
            :default-active="$router.apth"
