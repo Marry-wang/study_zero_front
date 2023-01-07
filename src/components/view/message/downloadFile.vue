@@ -1,6 +1,7 @@
 <template>
   <div id="downloadFile">
     <button>文件下载</button>
+    <button class="doui">外部引入css</button>
   </div>
 
 </template>
@@ -13,6 +14,6 @@
 </script>
 
 <style scoped>
-
-</style>>
+@import url('../../../scss/testcss.scss');
+</style>
 
