@@ -13,7 +13,10 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 @import url('../../../scss/testcss.scss');
+// .doui{
+//   background-color:$component-bgcolor;
+// }
 </style>
 
