@@ -15,8 +15,5 @@
 
 <style scoped lang='scss'>
 @import url('../../../scss/index.scss');
-// .doui{
-//   background-color:$component-bgcolor;
-// }
 </style>
 
