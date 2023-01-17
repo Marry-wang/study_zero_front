@@ -6,38 +6,31 @@
       <el-table-column
         fixed
         prop="date"
-        label="日期"
-        width="150">
+        label="日期">
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名"
-        width="120">
+        label="姓名">
       </el-table-column>
       <el-table-column
         prop="province"
-        label="省份"
-        width="120">
+        label="省份">
       </el-table-column>
       <el-table-column
         prop="city"
-        label="市区"
-        width="120">
+        label="市区">
       </el-table-column>
       <el-table-column
         prop="address"
-        label="地址"
-        width="300">
+        label="地址">
       </el-table-column>
       <el-table-column
         prop="zip"
-        label="邮编"
-        width="120">
+        label="邮编">
       </el-table-column>
       <el-table-column
         fixed="right"
-        label="操作"
-        width="100">
+        label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
           <el-button type="text" size="small">编辑</el-button>
