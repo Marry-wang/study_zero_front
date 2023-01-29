@@ -126,6 +126,7 @@
       }
     },
     mounted(){
+      this.menuList1();
         let tab1={
           title: '首页',
           name: '/home',
@@ -134,6 +135,13 @@
         this.Tabs.push(tab1);
     },
     methods: {
+      menuList1(){
+        this.$axios.post("/system/getMenu",{}).then(res=>{
+          console.log(res+"++++++++++++++++++++++++++++++++++++")
+        }).catch(res=>{
+            console.log(res)
+        })
+      },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
