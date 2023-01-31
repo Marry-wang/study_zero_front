@@ -136,11 +136,16 @@
     },
     methods: {
       menuList1(){
-        this.$axios.post("/system/getMenu",{}).then(res=>{
-          console.log(res+"++++++++++++++++++++++++++++++++++++")
-        }).catch(res=>{
-            console.log(res)
-        })
+        console.log("进了")
+        let params = {};
+        this.$axios.post("http://localhost:8080/apis/system/getMenu",params)
+          .then(function (response) {
+              console.log(response);
+           })
+        .catch(function (error) {
+             console.log(error);
+       });
+
       },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
