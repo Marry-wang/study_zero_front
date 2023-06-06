@@ -138,9 +138,9 @@
       menuList1(){
         console.log("进了")
         let params = {};
-        this.$axios.post("http://localhost:8080/apis/system/getMenu",params)
+        this.$axios.post("http://localhost:8080/apis/system/system/getMenu",params)
           .then(function (response) {
-              console.log(response);
+              console.log(response.data);
            })
         .catch(function (error) {
              console.log(error);
