@@ -127,20 +127,22 @@
     },
     mounted(){
       this.menuList1();
-        let tab1={
-          title: '首页',
-          name: '/home',
-          content:'',
-        }
-        this.Tabs.push(tab1);
+      let tab1={
+        title: '首页',
+        name: '/home',
+        content:'',
+      }
+      this.Tabs.push(tab1);
     },
     methods: {
       menuList1(){
-        console.log("进了")
+        const that = this;
         let params = {};
         this.$axios.post("http://localhost:8080/apis/system/system/getMenu",params)
           .then(function (response) {
-              console.log(response.data);
+            var menus = response.data.data;
+            that.menuList = menus;
+            console.log(that.menuList);
            })
         .catch(function (error) {
              console.log(error);
@@ -148,10 +150,10 @@
 
       },
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       addtab(params){
         let tab={
