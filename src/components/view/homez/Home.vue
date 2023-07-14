@@ -41,7 +41,7 @@
         <el-container>
           <!-- 控制展示屏的大小 -->
           <div style="width:100%">
-            <el-tabs v-model="TabsValue" type="border-card" closable
+            <!-- <el-tabs v-model="TabsValue" type="border-card" closable
             @tab-remove="removeTab"
             @tab-click="clickTab"
             >
@@ -51,17 +51,7 @@
               :name="item.name"
               >
               </el-tab-pane>
-            </el-tabs>
-            <!-- <el-tag
-              :key="item.title" 
-              v-for="item in Tabs"
-              closable
-              :disable-transitions="false"
-              @click="clickTab"
-              @close="removeTab(item.title)">
-              {{item.title}}
-            </el-tag> -->
-          
+            </el-tabs> -->
           <!-- 主要容器区域 -->
           
             <el-main>
@@ -134,6 +124,7 @@
         content:'',
       }
       this.Tabs.push(tab1);
+      // this.$router.push({path: "/home"})
     },
     methods: {
       menuList1(){
@@ -143,7 +134,6 @@
           .then(function (response) {
             var menus = response.data;
             that.menuList = menus;
-            console.log(that.menuList);
            })
         .catch(function (error) {
              console.log(error);
@@ -166,20 +156,19 @@
         for( let i = 0; i< this.Tabs.length;i++) { 
           if(this.Tabs[i].title ==params.menuName ){
                 tabNum=tabNum+1;
-            }
+          }
         }
         if(tabNum ==0){
           this.Tabs.push(tab);
         }
         
       },
-       removeTab(targetName) {
+      removeTab(targetName) {
         console.log("targetName",targetName)
         if(targetName !='/home'){
           let tabs = this.Tabs;
           let activeName = this.TabsValue;
            console.log("activeName",activeName)
-          // if (activeName === targetName) {
             tabs.forEach((tab, index) => {
               if (tab.name === targetName) {
                 let nextTab = tabs[index + 1] || tabs[index - 1];
@@ -191,10 +180,8 @@
                 }
               }
             });
-        //  }
           
           this.TabsValue = activeName;
-          // this.Tabs.splice(this.Tabs.indexOf(targetName), 1);
           this.Tabs = tabs.filter(tab => tab.name !== targetName);
           if(this.Tabs.length ==1){
             this.$router.push({path: "/home"})
