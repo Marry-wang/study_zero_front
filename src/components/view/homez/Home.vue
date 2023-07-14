@@ -74,6 +74,7 @@
   </div>
 </template>
 <script>
+  import {getMenuList} from '@/api/login/menu';
   export default {
     data() {
       return {
@@ -138,9 +139,9 @@
       menuList1(){
         const that = this;
         let params = {};
-        this.$axios.post("http://localhost:8080/apis/system/system/getMenu",params)
+        getMenuList(params)
           .then(function (response) {
-            var menus = response.data.data;
+            var menus = response.data;
             that.menuList = menus;
             console.log(that.menuList);
            })
