@@ -1,11 +1,11 @@
 <template>
     <div>
-        <el-table
+        <el-table 
+        v-loading="loading"
         :data="menuList"
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
-        border
-        :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
+        :tree-props="{children: 'children' , hasChildren: 'hasChildren'}">
             <el-table-column
                 prop="menuName"
                 label="名称"
@@ -30,32 +30,47 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <add-menu
+            v-show="addShow"
+            ref="addOrUpdate"
+        >
+        </add-menu>
     </div>
 </template>
 <script scoped>
-    import {getMenuList} from '@/api/login/menu';
-    export default {
-        data() {
-            return {
-                menuList:[],
-            }
+import {getMenuList} from '@/api/login/menu';
+import AddMenu from './add.vue'
+export default {
+    components:{AddMenu},
+    data() {
+        return {
+            addShow: false,
+            menuList:[],
+            loading:false,
+            
+        }
+    },
+    mounted(){
+        this.getMenus();
+    },
+    methods: {
+        handleClick(row) {
+            this.addShow = true,
+            this.$nextTick(() => {
+                this.$refs.addOrUpdate.init(row)
+            })
         },
-        mounted(){
-            this.getMenus();
-        },
-        methods: {
-            handleClick(row) {
-                console.log(row);
-            },
-            getMenus(){
-                const that = this;
-                getMenuList({}).then(function (response) {
-                        that.menuList = response.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                });
-            }
+        getMenus(){
+            const that = this;
+            getMenuList({}).then(function (response) {
+                    that.menuList = response.data;
+                    this.loading=true;
+                })
+                .catch(function (error) {
+                    console.log(error);
+            });
         }
     }
+}
 </script>

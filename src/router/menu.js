@@ -5,7 +5,7 @@ import First from '@/components/view/homez/First'
 import Add from '@/components/view/message/addMsg'
 import Table from '@/components/view/message/tableShow'
 import Upload from '@/components/view/message/Fileupload'
-import mesageMenu from '@/components/view/message/Menu'
+import mesageMenu from '@/view/menu/index'
 import mesageRoule from '@/components/view/message/Roule'
 import mesageUser from '@/components/view/message/User'
 
@@ -18,7 +18,7 @@ export default[
         children:[
             {
                 path: '/mesageMenu',
-                component: mesageMenu
+                component: mesageMenu,
               },
             {
                 path: '/mesageRoule',
