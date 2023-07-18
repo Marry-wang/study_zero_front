@@ -109,21 +109,8 @@ export function post (url,params){
             method: 'post',
             url: url,
             data: params,
-            transformRequest: [
-                function (data) {
-                    let ret = ''
-                    for (let it in data) {
-                    ret +=
-                        encodeURIComponent(it) +
-                        '=' +
-                        encodeURIComponent(data[it]) +
-                        '&'
-                    }
-                    return ret
-                }
-            ],
             headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
             }
         })
         .then(res =>{
@@ -165,3 +152,11 @@ export function postUpload (url,params){
 }
 
 
+
+export const updateMenu1 = (form) => {
+    return axios({
+      url: 'system/system/updateMenu',
+      method: 'post',
+      data: form
+    })
+  }
