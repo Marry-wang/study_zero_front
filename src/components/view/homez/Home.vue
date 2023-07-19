@@ -118,13 +118,6 @@
     },
     mounted(){
       this.menuList1();
-      let tab1={
-        title: '首页',
-        name: '/home',
-        content:'',
-      }
-      this.Tabs.push(tab1);
-      // this.$router.push({path: "/home"})
     },
     methods: {
       menuList1(){
@@ -146,58 +139,6 @@
       handleClose(key, keyPath) {
         // console.log(key, keyPath);
       },
-      addtab(params){
-        let tab={
-          title: params.menuName,
-          name: params.path,
-          content:'',
-        }
-        let tabNum =0;
-        for( let i = 0; i< this.Tabs.length;i++) { 
-          if(this.Tabs[i].title ==params.menuName ){
-                tabNum=tabNum+1;
-          }
-        }
-        if(tabNum ==0){
-          this.Tabs.push(tab);
-        }
-        
-      },
-      removeTab(targetName) {
-        console.log("targetName",targetName)
-        if(targetName !='/home'){
-          let tabs = this.Tabs;
-          let activeName = this.TabsValue;
-           console.log("activeName",activeName)
-            tabs.forEach((tab, index) => {
-              if (tab.name === targetName) {
-                let nextTab = tabs[index + 1] || tabs[index - 1];
-                 console.log("nextTab",nextTab)
-                if (nextTab) {
-                  activeName = nextTab.name;
-                  console.log("activeName11",activeName)
-                   this.$router.push({path: activeName})
-                }
-              }
-            });
-          
-          this.TabsValue = activeName;
-          this.Tabs = tabs.filter(tab => tab.name !== targetName);
-          if(this.Tabs.length ==1){
-            this.$router.push({path: "/home"})
-          }else if(this.Tabs.length ==0){
-            let tab1={
-              title: '首页',
-              name: '/home',
-              content:'',
-            }
-            this.Tabs.push(tab1);
-          }
-        }
-      },
-      clickTab (tab) {
-        this.$router.push({path: tab._props.name})
-      }
     },
   };
 </script>
