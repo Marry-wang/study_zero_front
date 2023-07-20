@@ -53,7 +53,7 @@
 </template>
 <script scoped>
 import {getMenuList,delMenu} from '@/api/login/menu';
-import AddMenu from './add.vue'
+import AddMenu from './menu-form.vue'
 export default {
     components:{AddMenu},
     data() {
