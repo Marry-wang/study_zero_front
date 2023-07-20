@@ -43,19 +43,19 @@
             </el-table-column>
         </el-table>
 
-        <add-menu
+        <menu-form
             v-show="addShow"
             ref="addOrUpdate"
             @refreshDataList="getMenus"
         >
-        </add-menu>
+        </menu-form>
     </div>
 </template>
 <script scoped>
-import {getMenuList,delMenu} from '@/api/login/menu';
-import AddMenu from './menu-form.vue'
+import {getMenuList,delMenu} from '@/api/login/system';
+import MenuForm from './menu-form.vue'
 export default {
-    components:{AddMenu},
+    components:{MenuForm},
     data() {
         return {
             addShow: false,

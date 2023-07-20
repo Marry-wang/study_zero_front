@@ -115,12 +115,12 @@ export function post (url,params){
         })
         .then(res =>{
             if(res.data.code!==200){
-                // reject(res.data.message)
-                // Loading.service(true).close()
+                reject(res.data.message)
+                Loading.service(true).close()
                 Message({message:res.data.message,type:'error'})
             }else{
-                // resolve(res.data)
-                // Loading.service(true).close()
+                resolve(res.data)
+                Loading.service(true).close()
                 Message({message:'请求成功',type:'success'})
                 return res.data
             }

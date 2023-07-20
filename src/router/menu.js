@@ -6,8 +6,8 @@ import Add from '@/components/view/message/addMsg'
 import Table from '@/components/view/message/tableShow'
 import Upload from '@/components/view/message/Fileupload'
 import mesageMenu from '@/view/menu/index'
-import mesageRoule from '@/components/view/message/Roule'
-import mesageUser from '@/components/view/message/User'
+import mesageRoule from '@/view/role/index'
+import mesageUser from '@/view/user/index'
 
 import download from '@/components/view/message/downloadFile'
 export default[

@@ -30,7 +30,7 @@
                   <i :class="menu.icon"></i>
                   <span>{{menu.menuName}}</span>
                 </template>
-                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" @click="addtab(menuC)"> 
+                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" > 
                   <i :class="menuC.icon"></i>
                   {{menuC.menuName}}
                 </el-menu-item>
@@ -64,7 +64,7 @@
   </div>
 </template>
 <script>
-  import {getMenuList} from '@/api/login/menu';
+  import {getMenuList} from '@/api/login/system';
   export default {
     data() {
       return {

@@ -48,11 +48,11 @@
     </el-dialog>
 </template>
 <script>
-import {addOrUpdateMenu,getMenuList} from '@/api/login/menu';
+import {addOrUpdateMenu,getMenuList} from '@/api/login/system';
 import Treeselect from '@riophae/vue-treeselect'
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default{
-    name:"AddMenu",
+    name:"MenuForm",
     components: { Treeselect },
     data(){
         return{
@@ -79,15 +79,18 @@ export default{
                 this.form.icon = "";
                 this.form.path = "";
             }else{
-                this.form = row;
+                this.form.id = row.id;
+                this.form.menuName = row.menuName;
+                this.form.icon = row.icon;
+                this.form.path = row.path;
             }
             this.menuTitle = menuTitle;
         },
         addOrUpdateMenu(){
-            console.log(this.form)
             this.$refs['dataForm'].validate((valid) => {
                 const that = this;
                 addOrUpdateMenu(this.form).then(function (response) {
+                        that.form.parentId = null;
                         that.dialogFormVisible = false;
                         that.$emit('refreshDataList')
                     })
