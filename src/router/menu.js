@@ -1,15 +1,15 @@
 
-import Home from '@/components/view/homez/Home'
-import First from '@/components/view/homez/First'
+import Home from '@/view/homez/Home'
+import First from '@/view/homez/First'
 
-import Add from '@/components/view/message/addMsg'
-import Table from '@/components/view/message/tableShow'
-import Upload from '@/components/view/message/Fileupload'
+import Add from '@/view/message/addMsg'
+import Table from '@/view/message/tableShow'
+import Upload from '@/view/message/Fileupload'
 import mesageMenu from '@/view/menu/index'
 import mesageRoule from '@/view/role/index'
 import mesageUser from '@/view/user/index'
 
-import download from '@/components/view/message/downloadFile'
+import download from '@/view/message/downloadFile'
 export default[
     {
         path: '/home',

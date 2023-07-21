@@ -14,6 +14,6 @@
 </script>
 
 <style scoped lang='scss'>
-@import url('../../../scss/index.css');
+@import url('./../../scss/index.css');
 </style>
 
