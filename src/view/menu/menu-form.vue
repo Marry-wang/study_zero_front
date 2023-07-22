@@ -83,6 +83,7 @@ export default{
                 this.form.menuName = row.menuName;
                 this.form.icon = row.icon;
                 this.form.path = row.path;
+                this.form.parentId = row.parentId;
             }
             this.menuTitle = menuTitle;
         },
