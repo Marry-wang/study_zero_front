@@ -16,3 +16,7 @@ export const delUser = params =>postform('system/system/delUser',params)
 export const getRoleList = params =>post('system/system/getRole',params)
 export const addOrUpdateRole = params =>postform('system/system/addOrUpdateRole',params)
 export const delRole = params =>postform('system/system/delRole',params)
+
+
+//roleMenu
+export const getRoleMenuList = params =>get('system/system/getRoleMenuIds',params)

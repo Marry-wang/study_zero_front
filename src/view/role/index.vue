@@ -24,6 +24,7 @@
         label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick('修改角色信息',scope.row)" type="text" size="small">编辑</el-button>
+          <el-button @click="selectMenuList(scope.row)" type="text" size="small">权限</el-button>
           <el-button @click="delRole(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -35,18 +36,41 @@
     @refreshDataList="getRoles"
     >
     </role-form>
+
+    <el-dialog 
+        title="权限列表"
+        :visible.sync="dialogFormVisible"
+        width="20%"
+    >
+      <el-tree
+        :data="menuList"
+        show-checkbox
+        default-expand-all
+        :default-checked-keys="defaultMenu"
+        node-key="id"
+        :props="defaultProps">
+      </el-tree>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import roleForm from './role-form.vue'
-import {getRoleList,delRole} from '@/api/login/system'
+import {getRoleList,delRole,getMenuList,getRoleMenuList} from '@/api/login/system'
   export default {
     components:{roleForm},
     data() {
       return {
         tableData: [],
-        show:false
+        show:false,
+        dialogFormVisible:false,
+        menuList:[],
+        defaultMenu:[],
+        defaultProps:{
+          id:'id',
+          label:'menuName',
+          children:'children'
+        }
       }
     },
     mounted(){
@@ -74,6 +98,18 @@ import {getRoleList,delRole} from '@/api/login/system'
           that.getRoles()
         })
         .catch(error=>console.log(error))
+      },
+      selectMenuList(row){
+        const roleId = row.roleId;
+        const that =this;
+        getMenuList({}).then(response=>{
+          that.menuList = response.data;
+          that.dialogFormVisible = true;
+        }).catch(error=>console.log(error))
+
+        getRoleMenuList({"roleId":roleId}).then(response=>{
+          that.defaultMenu = response.data
+        }).catch(error=>console.log(error))
       }
     },
   }

@@ -58,10 +58,12 @@ axios.defaults.timeout = 10000
  */
 export function get (url, params){
     return new Promise((resolve,reject) =>{
-        axios.get(url,{
-            data: params
-        },{headers:{'Content-Type':"application/json;charset=utf-8"}}
-        ).then(res =>{
+        axios({
+            method: 'get',
+            url: url,
+            params: params
+        })
+        .then(res =>{
             resolve(res.data)
             Loading.service(true).close()
             // Message({message:'请求成功',type:'success'})
