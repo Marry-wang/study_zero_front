@@ -24,6 +24,7 @@
         label="操作">
         <template slot-scope="scope">
           <el-button @click="handleClick('修改用户信息',scope.row)" type="text" size="small">编辑</el-button>
+          <el-button @click="changeUserRole(scope.row)" type="text" size="small">授权</el-button>
           <el-button @click="delUser(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -35,18 +36,38 @@
     @refreshDataList="getUsers"
     >
     </user-form>
+
+    <el-dialog 
+        title="权限列表"
+        :visible.sync="dialogFormVisible"
+        width="20%"
+    >
+    <el-select v-model="userRoles" multiple placeholder="请选择">
+      <el-option
+        v-for="item in roles"
+        :key="item.roleId"
+        :label="item.roleName"
+        :value="item.roleId">
+      </el-option>
+    </el-select>
+    <el-button @click="saveUserRoles" type="text" size="small">保存</el-button>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import userForm from './user-form.vue'
-import {getUserList,delUser} from '@/api/login/system'
+import {getUserList,delUser,getRoleList,selectUserRole,addOrUpdateUser} from '@/api/login/system'
   export default {
     components:{userForm},
     data() {
       return {
         tableData: [],
-        show:false
+        show:false,
+        dialogFormVisible:false,
+        userRoles:[],
+        roles:[],
+        selectUserId:""
       }
     },
     mounted(){
@@ -73,6 +94,27 @@ import {getUserList,delUser} from '@/api/login/system'
         .then(response=>{
           that.getUsers()
         })
+        .catch(error=>console.log(error))
+      },
+      changeUserRole(row){
+        const that =this;
+        this.selectUserId =row.userId;
+        getRoleList({})
+        .then(response=>{
+          that.roles = response.data
+        })
+        .catch(error=>console.log(error))
+        
+
+        selectUserRole({"userId":row.userId}).then(response=>{
+          that.userRoles = response.data
+        }).catch(error=>console.log(error))
+
+        this.dialogFormVisible = true;
+      },
+      saveUserRoles(){
+        addOrUpdateUser({"userId":this.selectUserId,"roleIdList":this.userRoles})
+        .then(response=>{this.dialogFormVisible = false;})
         .catch(error=>console.log(error))
       }
     },

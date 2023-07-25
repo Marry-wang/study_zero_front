@@ -20,3 +20,7 @@ export const delRole = params =>postform('system/system/delRole',params)
 
 //roleMenu
 export const getRoleMenuList = params =>get('system/system/getRoleMenuIds',params)
+
+
+//userRole
+export const selectUserRole = params =>get('system/system/selectUserRole',params)
