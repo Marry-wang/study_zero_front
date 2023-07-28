@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-loading="loading">
         <el-form :inline="true">
             <el-form-item>
                 <el-button
@@ -12,7 +12,6 @@
             </el-form-item>
         </el-form>
         <el-table 
-        v-loading="loading"
         border 
         :data="menuList"
         style="width: 100%;margin-bottom: 20px;"
@@ -71,14 +70,13 @@ export default {
         handleClick(menuTitle,row) {
             this.addShow = true,
             this.$nextTick(() => {
-                this.$refs.addOrUpdate.init(menuTitle,row)
+                this.$refs.addOrUpdate.init(menuTitle,row,menuList)
             })
         },
         getMenus(){
             const that = this;
             getMenuList({}).then(function (response) {
                     that.menuList = response.data;
-                    this.loading=true;
                 })
                 .catch(function (error) {
                     console.log(error);

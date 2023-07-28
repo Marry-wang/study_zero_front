@@ -68,10 +68,10 @@ export default{
         }
     },
     mounted(){
-        this.getMenus();
+        
     },
     methods:{
-        init(menuTitle,row){
+        init(menuTitle,row,menuList){
             this.dialogFormVisible = true;
             if(row === null || row===""){
                 this.form.id = "";
@@ -86,6 +86,7 @@ export default{
                 this.form.parentId = row.parentId;
             }
             this.menuTitle = menuTitle;
+            this.menuList = menuList;
         },
         addOrUpdateMenu(){
             this.$refs['dataForm'].validate((valid) => {

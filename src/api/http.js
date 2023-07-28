@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Loading, Message } from 'element-ui';
+import { Message } from 'element-ui';
 import Qs from 'qs'
 
 // // 环境的切换
@@ -65,12 +65,12 @@ export function get (url, params){
         })
         .then(res =>{
             resolve(res.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             // Message({message:'请求成功',type:'success'})
             return res
         }).catch(err =>{
             reject(err.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             Message({message:'加载失败',type:'error'})
         })
     })
@@ -87,13 +87,13 @@ export function post (url,params){
         axios.post(url,{data:Qs.stringify(params)},{headers:{'Content-Type':"application/json;charset=utf-8"}})
         .then(res =>{
             resolve(res.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             // Message({message:'请求成功',type:'success'})
             return res.data
         })
         .catch(err =>{
             reject(err.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             Message({message:'加载失败',type:'error'})
         })
     })
@@ -118,11 +118,11 @@ export function post (url,params){
         .then(res =>{
             if(res.data.code!==200){
                 reject(res.data.message)
-                Loading.service(true).close()
+                // Loading.service(true).close()
                 Message({message:res.data.message,type:'error'})
             }else{
                 resolve(res.data)
-                Loading.service(true).close()
+                // Loading.service(true).close()
                 Message({message:'请求成功',type:'success'})
                 return res.data
             }
@@ -147,13 +147,13 @@ export function postUpload (url,params){
         })
         .then(res =>{
             resolve(res.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             // Message({message:'请求成功',type:'success'})
             return res.data
         })
         .catch(err =>{
             reject(err.data)
-            Loading.service(true).close()
+            // Loading.service(true).close()
             Message({message:'加载失败',type:'error'})
         })
     })
