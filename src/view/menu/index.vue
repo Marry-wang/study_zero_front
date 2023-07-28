@@ -70,7 +70,7 @@ export default {
         handleClick(menuTitle,row) {
             this.addShow = true,
             this.$nextTick(() => {
-                this.$refs.addOrUpdate.init(menuTitle,row,menuList)
+                this.$refs.addOrUpdate.init(menuTitle,row,this.menuList)
             })
         },
         getMenus(){
