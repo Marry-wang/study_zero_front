@@ -97,7 +97,7 @@ import {getRoleList,delRole,getMenuList,getRoleMenuList,addOrUpdateRole} from '@
       },
       delRole(row){
         const that =this;
-        delRole({"id":row.roleId})
+        delRole({"roleId":row.roleId})
         .then(response=>{
           that.getRoles()
         })
