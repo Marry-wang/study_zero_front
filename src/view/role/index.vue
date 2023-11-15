@@ -37,7 +37,7 @@
     >
     </role-form>
 
-    <el-dialog 
+    <el-dialog
         title="权限列表"
         :visible.sync="dialogFormVisible"
         width="20%"
