@@ -47,13 +47,12 @@ export default {
             username:"",
             password:"",
             form: {
-                username:"",
-                password:"",
             }
         }
     },
     methods:{
         login(){
+            sessionStorage.setItem('token',"");
             loginform(this.form)
             .then((response) =>{     
                 this.msg =  response.data

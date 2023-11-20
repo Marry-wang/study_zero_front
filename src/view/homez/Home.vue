@@ -5,8 +5,10 @@
       <!-- 顶栏容器 -->
       <el-header>
           <span  style="float: left; font-size: 12px">logo</span>
-          <span  style="float: right; font-size: 12px">退出登录</span>
+          
           <span  style="float: right; font-size: 12px">用户名:{{name}}</span>
+
+          <button @click="logOut">退出登录</button>
       </el-header>
         
       <el-container>
@@ -124,6 +126,10 @@
       this.getUserName();
     },
     methods: {
+      logOut(){
+        sessionStorage.setItem('token',"");
+        this.$router.push('/')
+      },
       getUserName(){
         userName({'token':sessionStorage.getItem('token')})
             .then((response) =>{     

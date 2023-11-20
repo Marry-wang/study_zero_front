@@ -42,7 +42,7 @@ axios.interceptors.response.use(function(response) {
         } else if (error.request.status == 400) {
             Vue.prototype.$message.error('用户名或密码错误')
         }else {
-            Vue.prototype.$message.error(error.request.$message)
+            Vue.prototype.$message.error(error.request.message)
         }
     } else if (error.response) {
         console.log(error.response.data);
