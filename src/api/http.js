@@ -28,7 +28,7 @@ axios.interceptors.request.use(function(config) {
 axios.interceptors.response.use(function(response) {
     if(response.status == 200){
         if(response.data.code !=200){
-            Vue.prototype.$message.error(response.data.message)
+            // Vue.prototype.$message.error(response.data.message)
         }
     }
     return response
