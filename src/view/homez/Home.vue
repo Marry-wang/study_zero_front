@@ -6,6 +6,7 @@
       <el-header>
           <span  style="float: left; font-size: 12px">logo</span>
           <span  style="float: right; font-size: 12px">退出登录</span>
+          <span  style="float: right; font-size: 12px">用户名:{{name}}</span>
       </el-header>
         
       <el-container>
@@ -65,9 +66,11 @@
 </template>
 <script>
   import {getMenuList} from '@/api/login/system';
+  import {userName} from '@/api/login/login';
   export default {
     data() {
       return {
+        name:'',
         TabsValue:'',
         Tabs:[],
         menuList:[
@@ -118,8 +121,19 @@
     },
     mounted(){
       this.menuList1();
+      this.getUserName();
     },
     methods: {
+      getUserName(){
+        userName({'token':sessionStorage.getItem('token')})
+            .then((response) =>{     
+                this.name =  response.data.userName
+                // window.console.log(response);   
+            }).catch((error) =>
+                window.console.log(error)       
+            
+            )
+      },
       menuList1(){
         const that = this;
         let params = {};

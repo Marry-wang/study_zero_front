@@ -14,41 +14,43 @@ import Qs from 'qs'
 //设置请求超时时间
 axios.defaults.timeout = 10000
 
-// //将token带入请求头中
-// axios.interceptors.request.use(function(config) {
-//     let token = sessionStorage.getItem('accessToken')
-//     if (token) { 
-//         config.headers['accessToken'] =  token
-//     }
-//     return config
-// }, function(error) {
-//     return Promise.reject(error)
-// })
-// //响应拦截
-// axios.interceptors.response.use(function(response) {
-//     if(response.status == 200){
-//         if(response.data.code !=200){
-//             Vue.prototype.$message.error(response.data.message)
-//         }
-//     }
-//     return response
-// }, function(error) { //登录失败异常
-//     if (error.request) {
-//         if (error.request.status == 401) {
-//             Vue.prototype.$message.error('未授权，请重新登录')
-//             router.replace({
-//                 path: '/login' // 到登录页重新获取token
-//             })
-//         } else if (error.request.status == 400) {
-//             Vue.prototype.$message.error('用户名或密码错误')
-//         }
-//     } else if (error.response) {
-//         console.log(error.response.data);
-//         console.log(error.response.status);
-//         console.log(error.response.headers);
-//     }
-//     return Promise.reject(error)
-// })
+//将token带入请求头中
+axios.interceptors.request.use(function(config) {
+    let token = sessionStorage.getItem('token')
+    if (token) { 
+        config.headers['token'] =  token
+    }
+    return config
+}, function(error) {
+    return Promise.reject(error)
+})
+//响应拦截
+axios.interceptors.response.use(function(response) {
+    if(response.status == 200){
+        if(response.data.code !=200){
+            Vue.prototype.$message.error(response.data.message)
+        }
+    }
+    return response
+}, function(error) { //登录失败异常
+    if (error.request) {
+        if (error.request.status == 401) {
+            Vue.prototype.$message.error('未授权，请重新登录')
+            router.replace({
+                path: '/login' // 到登录页重新获取token
+            })
+        } else if (error.request.status == 400) {
+            Vue.prototype.$message.error('用户名或密码错误')
+        }else {
+            Vue.prototype.$message.error(error.request.$message)
+        }
+    } else if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+    }
+    return Promise.reject(error)
+})
 
 
 /**
