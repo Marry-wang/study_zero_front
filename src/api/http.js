@@ -18,7 +18,7 @@ axios.defaults.timeout = 10000
 //将token带入请求头中
 axios.interceptors.request.use(function(config) {
     let token = sessionStorage.getItem('token')
-    if (token) { 
+    if (token) {
         config.headers['token'] =  token
     }
     return config
@@ -39,16 +39,10 @@ axios.interceptors.response.use(function(response) {
     return response
 }, function(error) { //登录失败异常
     if (error.request) {
-        if (error.request.status == 401) {
-            // Vue.prototype.$message.error('未授权，请重新登录')
-            router.replace({
-                path: '/login' // 到登录页重新获取token
-            })
-        } else if (error.request.status == 400) {
-            // Vue.prototype.$message.error('用户名或密码错误')
-        }else {
-            Vue.prototype.$message.error(error.request.message)
-        }
+      // router.replace({
+      //     path: '/' // 到登录页重新获取token
+      // })
+      Message({message:error,type:'error'})
     } else if (error.response) {
         console.log(error.response.data);
         console.log(error.response.status);

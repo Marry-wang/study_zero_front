@@ -5,35 +5,35 @@
       <!-- 顶栏容器 -->
       <el-header>
           <span  style="float: left; font-size: 12px">logo</span>
-          
+
           <span  style="float: right; font-size: 12px">用户名:{{name}}</span>
 
           <button @click="logOut">退出登录</button>
       </el-header>
-        
+
       <el-container>
         <!-- 侧边栏容器 -->
         <el-aside width="200px"  style="background-color: rgb(238, 241, 246);overflow:hidden">
-          <el-menu 
+          <el-menu
            :router="true"
            :default-active="$router.apth"
           >
             <el-menu-item index="/home">首页</el-menu-item>
           </el-menu>
 
-          <el-menu 
-            :default-active="this.$route.path" 
+          <el-menu
+            :default-active="this.$route.path"
             router
             :unique-opened="true"
             @open="handleOpen"
             @close="handleClose"
           >
-            <el-submenu :index="menu.menuName"  v-for="(menu , index ) in menuList" :key="index" >  
+            <el-submenu :index="menu.menuName"  v-for="(menu , index ) in menuList" :key="index" >
                 <template slot="title">
                   <i :class="menu.icon"></i>
                   <span>{{menu.menuName}}</span>
                 </template>
-                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" > 
+                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" >
                   <i :class="menuC.icon"></i>
                   {{menuC.menuName}}
                 </el-menu-item>
@@ -48,15 +48,15 @@
             @tab-remove="removeTab"
             @tab-click="clickTab"
             >
-              <el-tab-pane v-for="item in Tabs" 
-              :key="item.name" 
-              :label="item.title" 
+              <el-tab-pane v-for="item in Tabs"
+              :key="item.name"
+              :label="item.title"
               :name="item.name"
               >
               </el-tab-pane>
             </el-tabs> -->
           <!-- 主要容器区域 -->
-          
+
             <el-main>
               <router-view/>
             </el-main>
@@ -76,48 +76,48 @@
         TabsValue:'',
         Tabs:[],
         menuList:[
-          {
-            menuName:'第一级',
-            path:'',
-            icon:'el-icon-location',
-            children:[
-              {
-                menuName:'用户管理',path:'/mesageUser',icon:'el-icon-s-marketing',
-              },
-              {
-                menuName:'角色管理',path:'/mesageRoule',icon:'el-icon-s-opportunity',
-              }
-            ]
-          },
-          {
-            menuName:'第二级',
-            path:'',
-            icon:'el-icon-star-off',
-            children:[
-              {
-                menuName:'菜单管理',path:'/mesageMenu',icon:'el-icon-umbrella',
-              }
-            ]
-          },
-          {
-            menuName:'Element组件',
-            path:'',
-            icon:'el-icon-star-off',
-            children:[
-              {
-                menuName:'添加页',path:'/add',icon:'el-icon-umbrella',
-              },
-              {
-                menuName:'展示页',path:'/table',icon:'el-icon-umbrella',
-              },
-              {
-                menuName:'上传页',path:'/upload',icon:'el-icon-umbrella',
-              },
-              {
-                menuName:'下载页',path:'/download',icon:'el-icon-umbrella',
-              }
-            ]
-          }
+          // {
+          //   menuName:'第一级',
+          //   path:'',
+          //   icon:'el-icon-location',
+          //   children:[
+          //     {
+          //       menuName:'用户管理',path:'/mesageUser',icon:'el-icon-s-marketing',
+          //     },
+          //     {
+          //       menuName:'角色管理',path:'/mesageRoule',icon:'el-icon-s-opportunity',
+          //     }
+          //   ]
+          // },
+          // {
+          //   menuName:'第二级',
+          //   path:'',
+          //   icon:'el-icon-star-off',
+          //   children:[
+          //     {
+          //       menuName:'菜单管理',path:'/mesageMenu',icon:'el-icon-umbrella',
+          //     }
+          //   ]
+          // },
+          // {
+          //   menuName:'Element组件',
+          //   path:'',
+          //   icon:'el-icon-star-off',
+          //   children:[
+          //     {
+          //       menuName:'添加页',path:'/add',icon:'el-icon-umbrella',
+          //     },
+          //     {
+          //       menuName:'展示页',path:'/table',icon:'el-icon-umbrella',
+          //     },
+          //     {
+          //       menuName:'上传页',path:'/upload',icon:'el-icon-umbrella',
+          //     },
+          //     {
+          //       menuName:'下载页',path:'/download',icon:'el-icon-umbrella',
+          //     }
+          //   ]
+          // }
         ]
       }
     },
@@ -132,12 +132,12 @@
       },
       getUserName(){
         userName({'token':sessionStorage.getItem('token')})
-            .then((response) =>{     
+            .then((response) =>{
                 this.name =  response.data.userName
-                // window.console.log(response);   
+                // window.console.log(response);
             }).catch((error) =>
-                window.console.log(error)       
-            
+                window.console.log(error)
+
             )
       },
       menuList1(){
@@ -172,7 +172,7 @@
   .el-tabs--border-card>.el-tabs__content{
     padding: 0px;
   }
-  
+
   .el-aside {
     color: #333;
   }
