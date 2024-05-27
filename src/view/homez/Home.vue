@@ -4,11 +4,17 @@
     <el-container style="height:100vh; border: 0px solid #eee">
       <!-- 顶栏容器 -->
       <el-header>
-          <span  style="float: left; font-size: 12px">logo</span>
-
-          <span  style="float: right; font-size: 12px">用户名:{{name}}</span>
-
+        <div style="float: right; font-size: 14px">
+          <span>用户名:{{name}}</span>
           <button @click="logOut">退出登录</button>
+        </div>
+        <div style="float: left">
+          <el-image
+            style="width: 70px; height: 70px"
+            :fit="contain"
+            :src="logo"
+          ></el-image>
+        </div>
       </el-header>
 
       <el-container>
@@ -69,9 +75,11 @@
 <script>
   import {getMenuList} from '@/api/login/system';
   import {userName} from '@/api/login/login';
+  import logo from '@/assets/img/logo.png'
   export default {
     data() {
       return {
+        logo,
         name:'',
         TabsValue:'',
         Tabs:[],
