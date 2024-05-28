@@ -1,8 +1,8 @@
 <template>
     <div id ="login" >
-        <div>
+        <div :style="note">
             <!--flex弹性盒子模型，justify-content：主抽 -->
-            <div style="display: flex;justify-content: center;margin-top: 150px">
+            <div style="display: flex;justify-content: center;align-items: center;height:100vh">
                 <el-card style="width: 400px">
                     <div slot="header" class="clearfix">
                         <span>登录</span>
@@ -26,7 +26,7 @@
                             <td colspan="2" >
                             <!-- 点击事件的两种不同的写法v-on:click和 @click-->
                             <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
-                            
+
                             <el-button style="width: 350px;margin-top: 20px" type="primary" @click="login">登录</el-button>
                             </td>
                         </tr>
@@ -47,6 +47,12 @@ export default {
             username:"",
             password:"",
             form: {
+            },
+            note:{
+              backgroundImage: 'url('+require('@/assets/img/logo.png')+')',
+              height:"100vh",
+              width:"100%",
+              overflow:"hidden"
             }
         }
     },
@@ -54,18 +60,18 @@ export default {
         login(){
             sessionStorage.setItem('token',"");
             loginform(this.form)
-            .then((response) =>{     
+            .then((response) =>{
                 this.msg =  response.data
                 sessionStorage.setItem('token',this.msg);
                 console.log(sessionStorage.getItem('token'))
                 this.$router.push('/home')
             }).catch((error) =>
-                window.console.log(error)       
-            
+                window.console.log(error)
+
             )
-            
+
         },
-        
+
     }
 }
 </script>
