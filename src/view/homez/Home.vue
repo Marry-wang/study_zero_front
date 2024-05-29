@@ -11,7 +11,6 @@
         <div style="float: left">
           <el-image
             style="width: 70px; height: 70px"
-            :fit="contain"
             :src="logo"
           ></el-image>
         </div>
