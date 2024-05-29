@@ -49,7 +49,7 @@
 
         <el-container>
           <!-- 控制展示屏的大小 -->
-          <div style="width:100%">
+          <div style="width:100%;height: 100%;margin: 0">
             <!-- <el-tabs v-model="TabsValue" type="border-card" closable
             @tab-remove="removeTab"
             @tab-click="clickTab"
@@ -64,7 +64,7 @@
           <!-- 主要容器区域 -->
 
             <el-main>
-              <router-view/>
+              <router-view class="router-view-style"/>
             </el-main>
           </div>
         </el-container>
@@ -171,7 +171,7 @@
   };
 </script>
 
-<style  scoped>
+<style scoped>
   .el-header {
     background-color: #B3C0D1;
     color: #333;
@@ -180,8 +180,16 @@
   .el-tabs--border-card>.el-tabs__content{
     padding: 0px;
   }
-
   .el-aside {
     color: #333;
+  }
+  .el-main{
+    height: 100%;
+    width: 100%;
+    padding:0
+  }
+  .router-view-style{
+    height: 100%;
+    width: 100%;
   }
 </style>
