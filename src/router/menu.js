@@ -5,9 +5,9 @@ import First from '@/view/homez/First'
 import Add from '@/view/message/addMsg'
 import Table from '@/view/message/tableShow'
 import Upload from '@/view/message/Fileupload'
-import mesageMenu from '@/view/menu/index'
-import mesageRoule from '@/view/role/index'
-import mesageUser from '@/view/user/index'
+import messageMenu from '@/view/menu/index'
+import messageRole from '@/view/role/index'
+import messageUser from '@/view/user/index'
 
 import download from '@/view/message/downloadFile'
 export default[
@@ -17,21 +17,21 @@ export default[
         redirect:'/first',
         children:[
             {
-                path: '/mesageMenu',
-                component: mesageMenu,
+                path: '/messageMenu',
+                component: messageMenu,
               },
             {
-                path: '/mesageRoule',
-                component: mesageRoule,
+                path: '/messageRole',
+                component: messageRole,
             },
             {
-                path: '/mesageUser',
-                component: mesageUser,
-            }, 
+                path: '/messageUser',
+                component: messageUser,
+            },
             {
                 path: '/first',
                 component: First,
-            },   
+            },
             {
                 path: '/add',
                 component: Add
