@@ -11,8 +11,8 @@
                 </el-button>
             </el-form-item>
         </el-form>
-        <el-table 
-        border 
+        <el-table
+        border
         :data="menuList"
         style="width: 100%;margin-bottom: 20px;"
         row-key="id"
@@ -60,7 +60,7 @@ export default {
             addShow: false,
             menuList:[],
             loading:false,
-            
+
         }
     },
     mounted(){

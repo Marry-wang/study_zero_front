@@ -20,12 +20,6 @@
       <el-container>
         <!-- 侧边栏容器 -->
         <el-aside width="200px"  style="background-color: rgb(238, 241, 246);overflow:hidden">
-          <el-menu
-           :router="true"
-           :default-active="$router.apth"
-          >
-            <el-menu-item index="/home">首页</el-menu-item>
-          </el-menu>
 
           <el-menu
             :default-active="this.$route.path"
@@ -34,16 +28,28 @@
             @open="handleOpen"
             @close="handleClose"
           >
-            <el-submenu :index="menu.menuName"  v-for="(menu , index ) in menuList" :key="index" >
-                <template slot="title">
+            <div v-for="(menu , index ) in menuList" :key="index">
+              <div v-if="menu.menuName === '首页'">
+                <el-menu-item :index="menu.path">
                   <i :class="menu.icon"></i>
                   <span>{{menu.menuName}}</span>
-                </template>
-                <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" >
-                  <i :class="menuC.icon"></i>
-                  {{menuC.menuName}}
                 </el-menu-item>
-            </el-submenu>
+              </div>
+
+              <div v-if="menu.menuName != '首页'">
+                <el-submenu :index="menu.menuName">
+                  <template slot="title">
+                    <i :class="menu.icon"></i>
+                    <span>{{menu.menuName}}</span>
+                  </template>
+                  <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" >
+                    <i :class="menuC.icon"></i>
+                    {{menuC.menuName}}
+                  </el-menu-item>
+                </el-submenu>
+              </div>
+
+            </div>
           </el-menu>
         </el-aside>
 
@@ -73,7 +79,7 @@
   </div>
 </template>
 <script>
-  import {getMenuList} from '@/api/login/system';
+  import {getRoleMenuList} from '@/api/login/system';
   import {userName} from '@/api/login/login';
   import logo from '@/assets/img/logo.png'
   export default {
@@ -151,7 +157,7 @@
       menuList1(){
         const that = this;
         let params = {};
-        getMenuList(params)
+        getRoleMenuList(params)
           .then(function (response) {
             var menus = response.data;
             that.menuList = menus;

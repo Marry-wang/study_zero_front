@@ -58,7 +58,7 @@
 
 <script>
 import roleForm from './role-form.vue'
-import {getRoleList,delRole,getMenuList,getRoleMenuList,addOrUpdateRole} from '@/api/login/system'
+import {getRoleList,delRole,getMenuList,getRoleMenuIdList,addOrUpdateRole} from '@/api/login/system'
   export default {
     components:{roleForm},
     data() {
@@ -111,7 +111,7 @@ import {getRoleList,delRole,getMenuList,getRoleMenuList,addOrUpdateRole} from '@
           that.dialogFormVisible = true;
         }).catch(error=>console.log(error))
 
-        getRoleMenuList({"roleId":this.selectRoleId}).then(response=>{
+        getRoleMenuIdList({"roleId":this.selectRoleId}).then(response=>{
           that.defaultMenu = response.data
         }).catch(error=>console.log(error))
       },

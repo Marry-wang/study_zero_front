@@ -1,5 +1,5 @@
 <template>
-    <el-dialog 
+    <el-dialog
         :title="menuTitle"
         :visible.sync="dialogFormVisible"
         width="20%"
@@ -40,7 +40,7 @@
                 </el-form-item>
             </el-col>
           </el-row>
-        </el-form>  
+        </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
             <el-button @click="addOrUpdateMenu">确认</el-button>
@@ -48,7 +48,7 @@
     </el-dialog>
 </template>
 <script>
-import {addOrUpdateMenu,getMenuList} from '@/api/login/system';
+import {addOrUpdateMenu,getRoleMenuList} from '@/api/login/system';
 import Treeselect from '@riophae/vue-treeselect'
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default{
@@ -68,7 +68,7 @@ export default{
         }
     },
     mounted(){
-        
+
     },
     methods:{
         init(menuTitle,row,menuList){
@@ -103,7 +103,7 @@ export default{
         },
         getMenus(){
             const that = this;
-            getMenuList({}).then(function (response) {
+            getRoleMenuList({}).then(function (response) {
                     that.menuList = response.data
                 })
                 .catch(function (error) {
@@ -121,6 +121,6 @@ export default{
             };
         },
     }
-    
+
 }
 </script>

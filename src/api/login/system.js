@@ -1,7 +1,8 @@
 import {get, post,postform,postUpload} from '../http'
 
 // menu
-export const getMenuList = params =>post('system/system/getMenu',params)
+export const getRoleMenuList = params =>post('system/system/getRoleMenus',params)
+export const getMenuList = params =>post('system/system/getMenus',params)
 export const addOrUpdateMenu = params =>postform('system/system/addOrUpdateMenu',params)
 export const delMenu = params =>postform('system/system/delMenu',params)
 
@@ -19,7 +20,7 @@ export const delRole = params =>postform('system/system/delRole',params)
 
 
 //roleMenu
-export const getRoleMenuList = params =>get('system/system/getRoleMenuIds',params)
+export const getRoleMenuIdList = params =>get('system/system/getRoleMenuIds',params)
 
 
 //userRole
