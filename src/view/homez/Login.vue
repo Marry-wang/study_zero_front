@@ -38,6 +38,7 @@
 </template>
 <script>
 import {loginform} from '@/api/login/login';
+import {getRoleMenuList} from '@/api/login/system';
 export default {
     name:"login",
     data(){
@@ -63,12 +64,27 @@ export default {
             .then((response) =>{
                 this.msg =  response.data
                 sessionStorage.setItem('token',this.msg);
-                console.log(sessionStorage.getItem('token'))
-                this.$router.push('/home')
+                // console.log(sessionStorage.getItem('token'))
+                this.menuList()
             }).catch((error) =>
                 window.console.log(error)
 
             )
+
+        },
+        menuList(){
+          const that = this;
+          let params = {};
+          getRoleMenuList(params)
+            .then(function (response) {
+              var menus = response.data;
+              sessionStorage.setItem('menuList',JSON.stringify(menus));
+              //将路由跳转添加到这里，处理放在登录接口后又调用菜单接口的路由不跳转问题
+              that.$router.push('/home')
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
 
         },
 
