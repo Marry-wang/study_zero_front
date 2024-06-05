@@ -3,14 +3,14 @@ import { Message } from 'element-ui';
 import Qs from 'qs'
 import router from '../router'
 
-// // 环境的切换
-// // if (process.env.NODE_ENV === 'development') {
-// //     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
-// // } else if (process.env.NODE_ENV === 'debug') {
-// //     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
-// // } else if (process.env.NODE_ENV === 'production') {
-// //     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
-// // }
+// 环境的切换
+// if (process.env.NODE_ENV === 'development') {
+//     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
+// } else if (process.env.NODE_ENV === 'debug') {
+//     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
+// } else if (process.env.NODE_ENV === 'production') {
+//     axios.defaults.baseURL = 'https://cnodejs.org/api/v1'
+// }
 
 //设置请求超时时间
 axios.defaults.timeout = 10000
@@ -27,11 +27,11 @@ axios.interceptors.request.use(function(config) {
 })
 //响应拦截
 axios.interceptors.response.use(function(response) {
-    if(response.status == 200){
-        if(response.data.code !=200){
+    if(response.status === 200){
+        if(response.data.code !==200){
             // Vue.prototype.$message.error(response.data.message)
             Message({message:response.data.message,type:'error'})
-            if (response.data.code == 1000) {
+            if (response.data.code === 1000) {
                 router.push('/')
             }
         }

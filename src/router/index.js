@@ -25,11 +25,11 @@ Router.prototype.push = function push(location) {
 
 //禁止未携带token的登录
 router.beforeEach(async (to, from,next) => {
-  let logintoken =sessionStorage.getItem('token');
+  let loginToken =sessionStorage.getItem('token');
   if(!to){
     next({path:"/"});
-  }else if(to.path != '/'){
-    if(!logintoken){
+  }else if(to.path !== '/'){
+    if(!loginToken){
       next({path:"/"});
     }else{
       //根据路由有多少进行处理  如果路由里边只包含静态路由 那么进行动态路由添加  否则直接跳过
