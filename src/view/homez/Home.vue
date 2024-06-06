@@ -135,11 +135,12 @@
       }
     },
     mounted(){
-      this.menuList1();
+      this.menuListFunction();
       this.getUserName();
     },
     methods: {
       logOut(){
+        sessionStorage.setItem('menuList',"");
         sessionStorage.setItem('token',"");
         this.$router.push('/')
       },
@@ -153,7 +154,7 @@
 
             )
       },
-      menuList1(){
+      menuListFunction(){
         const that = this;
         let params = {};
         getRoleMenuList(params)

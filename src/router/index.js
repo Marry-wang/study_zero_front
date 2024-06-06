@@ -31,6 +31,7 @@ router.beforeEach(async (to, from,next) => {
   }else if(to.path !== '/'){
     if(!loginToken){
       next({path:"/"});
+      sessionStorage.setItem('menuList',"");
     }else{
       //根据路由有多少进行处理  如果路由里边只包含静态路由 那么进行动态路由添加  否则直接跳过
       if(router.options.routes.length>1){
@@ -75,7 +76,9 @@ router.beforeEach(async (to, from,next) => {
         }
       }
     }
-  }else{
+  }else if(to.path === '/' && loginToken){
+    next({path:"/home"});
+  } else{
     next()
   }
 })
