@@ -35,7 +35,7 @@
                 </el-menu-item>
               </div>
 
-              <div v-if="menu.menuName != '首页'">
+              <div v-if="menu.menuName !=='首页'">
                 <el-submenu :index="menu.menuName">
                   <template slot="title">
                     <i :class="menu.icon"></i>

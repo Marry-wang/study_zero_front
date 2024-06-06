@@ -51,6 +51,8 @@ export default {
             },
             note:{
               backgroundImage: 'url('+require('@/assets/img/logo.png')+')',
+              //图片铺满
+              backgroundSize:"cover",
               height:"100vh",
               width:"100%",
               overflow:"hidden"

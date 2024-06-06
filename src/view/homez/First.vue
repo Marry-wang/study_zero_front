@@ -10,6 +10,8 @@ export default {
     return{
       note:{
         backgroundImage: 'url('+require('@/assets/img/logo.png')+')',
+        //图片铺满
+        backgroundSize:"cover",
         height:"100%",
         width:"100%",
       }
