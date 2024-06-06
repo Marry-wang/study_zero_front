@@ -79,7 +79,7 @@
 </template>
 <script>
   import {getRoleMenuList} from '@/api/login/system';
-  import {userName} from '@/api/login/login';
+  import {userName,loginOut} from '@/api/login/login';
   import logo from '@/assets/img/logo.png'
   export default {
     data() {
@@ -140,12 +140,17 @@
     },
     methods: {
       logOut(){
-        sessionStorage.setItem('menuList',"");
-        sessionStorage.setItem('token',"");
-        this.$router.push('/')
+        loginOut({}).then((response)=>{
+          sessionStorage.setItem('menuList',"");
+          sessionStorage.setItem('token',"");
+          this.$router.push('/')
+        }).catch((error) =>
+          window.console.log(error)
+
+        )
       },
       getUserName(){
-        userName({'token':sessionStorage.getItem('token')})
+        userName({})
             .then((response) =>{
                 this.name =  response.data.userName
                 // window.console.log(response);

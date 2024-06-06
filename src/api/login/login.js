@@ -1,5 +1,7 @@
 import {get, post,postform,postUpload} from '../http'
 
+export const loginOut = params =>get('system/system/loginOut',params)
+
 export const loginform = params =>postform('system/system/login',params)
 // export const loginT = params =>post('/demo/jwt/loginTo',params)
 export const userName = params =>get('system/system/loginMessage',params)

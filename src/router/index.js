@@ -54,7 +54,7 @@ router.beforeEach(async (to, from,next) => {
             }
           }
           //此处添加首页页面
-          let firstUrl =routerCom('/src/view/homez/First');
+          let firstUrl =routerCom('@/view/homez/First');
           let firstObj = {
             path: '/first',
             component: firstUrl
@@ -84,7 +84,7 @@ router.beforeEach(async (to, from,next) => {
 })
 
 export  const routerCom=(path)=> { //对路由的component解析
-  path=path.substring(9)
+  path=path.substring(6)
   console.log(path)
   //此处component从数据库获取后进行处理，  因为必须'@/view'或者‘@/view/’进行拼接，否则不起作用
   return (resolve) => require([`@/view${path}`], resolve);
