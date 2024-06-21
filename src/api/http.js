@@ -124,7 +124,7 @@ export function post (url,params){
             }else{
                 resolve(res.data)
                 // Loading.service(true).close()
-                Message({message:'请求成功',type:'success'})
+                // Message({message:'请求成功',type:'success'})
                 return res.data
             }
         })
@@ -162,10 +162,3 @@ export function postUpload (url,params){
 
 
 
-export const updateMenu1 = (form) => {
-    return axios({
-      url: 'system/system/updateMenu',
-      method: 'post',
-      data: form
-    })
-  }
