@@ -22,7 +22,7 @@
 <script>
 import {editBookTypeSummary} from '@/api/book/book'
 export default{
-    name:"BookUpdateForm",
+    name:"BookTypeUpdateForm",
     data(){
         return{
             dialogFormVisible:false,

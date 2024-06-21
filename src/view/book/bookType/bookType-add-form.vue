@@ -22,7 +22,7 @@
 <script>
 import {addBookTypeSummary,editBookTypeSummary} from '@/api/book/book'
 export default{
-    name:"BookAddForm",
+    name:"BookTypeAddForm",
     data(){
         return{
             dialogFormVisible:false,
