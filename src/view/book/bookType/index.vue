@@ -29,28 +29,28 @@
       </el-table-column>
     </el-table>
 
-    <book-add-form
+    <bookType-add-form
     v-show="addShow"
     ref="add"
     @refreshDataList="getTypes"
     >
-    </book-add-form>
+    </bookType-add-form>
 
-    <book-update-form
+    <bookType-update-form
     v-show="updateShow"
     ref="update"
     @refreshDataList="getTypes"
     >
-    </book-update-form>
+    </bookType-update-form>
   </div>
 </template>
 
 <script>
-import bookAddForm from './book-add-form.vue'
-import bookUpdateForm from './book-update-form.vue'
+import bookTypeAddForm from './bookType-add-form.vue'
+import bookTypeUpdateForm from './bookType-update-form.vue'
 import {delBookTypeSummary,selectBookTypeSummary} from '@/api/book/book'
   export default {
-    components:{bookAddForm,bookUpdateForm},
+    components:{bookTypeAddForm,bookTypeUpdateForm},
     data() {
       return {
         tableData: [],
