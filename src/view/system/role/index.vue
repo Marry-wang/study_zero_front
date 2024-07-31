@@ -47,6 +47,7 @@
         show-checkbox
         default-expand-all
         ref="tree"
+        :check-strictly =true
         :default-checked-keys="defaultMenu"
         node-key="id"
         :props="defaultProps">
