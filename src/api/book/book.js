@@ -15,3 +15,7 @@ export const delBook = params =>get('user/book/delBook',params)
 export const selectBook = params =>postform('user/book/selectBook',params)
 
 export const editBook = params =>postform('user/book/editBook',params)
+
+export const selectBookBorrowingRecord = params =>get('user/book/selectBorrowingRecords',params)
+
+export const editBookBorrowingRecord = params =>postform('user/book/addOrUpdateBookBorrowingRecord',params)
