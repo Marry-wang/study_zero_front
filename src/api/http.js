@@ -120,7 +120,7 @@ export function post (url,params){
             if(res.data.code!==200){
                 reject(res.data.message)
                 // Loading.service(true).close()
-                Message({message:res.data.message,type:'error'})
+                // Message({message:res.data.message,type:'error'})
             }else{
                 resolve(res.data)
                 // Loading.service(true).close()
