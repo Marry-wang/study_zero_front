@@ -30,6 +30,7 @@
             </el-table-column>
             <el-table-column
                 prop="borrowingBy"
+                :formatter="userFunction"
                 label="借阅人">
             </el-table-column>
             <el-table-column
@@ -60,10 +61,24 @@
                 <el-row>
                     <el-col :span="24">
                         <el-form-item label="图书id" prop="bookId">
-                            <el-input v-model="form.bookId" placeholder=""></el-input>
+                            <el-select v-model="form.bookId" filterable  placeholder="请选择">
+                                <el-option
+                                v-for="item in books"
+                                :key="item.bookId"
+                                :label="item.bookName"
+                                :value="item.bookId">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                         <el-form-item label="借阅人" prop="borrowingBy">
-                            <el-input v-model="form.borrowingBy" placeholder="" ></el-input>
+                            <el-select v-model="form.borrowingBy" filterable  placeholder="请选择">
+                                <el-option
+                                v-for="item in users"
+                                :key="item.userId"
+                                :label="item.userName"
+                                :value="item.userId">
+                                </el-option>
+                            </el-select>
                         </el-form-item>
                     </el-col>
                 </el-row>
@@ -76,25 +91,44 @@
     </div>
 </template>
 <script>
-import {selectBookBorrowingRecord,editBookBorrowingRecord} from '@/api/book/book'
+import {selectBook,selectBookBorrowingRecord,editBookBorrowingRecord} from '@/api/book/book'
+import {getUserList} from '@/api/login/system'
 export default {
     data(){
         return{
             tableData:[],
+            users:[],
+            books:[],
             isShow:false,
             form:{
                 "bookId":"",
-                "borrowingTime":"",
-                "returnTime":"",
                 "borrowingBy":"",
-                "status":""
+                "borrowingRecordId":""
             }
         }
     },
     mounted(){
         this.selectBookBorrowingRecords();
+        this.getUsers();
+        this.getBooks();
     },
     methods:{
+        getUsers(){
+            const that =this;
+            getUserList({})
+            .then(response=>{
+                that.users = response.data
+            })
+            .catch(error=>console.log(error))
+        },
+        getBooks(){
+            const that =this;
+            selectBook({})
+            .then(response=>{
+                that.books = response.data
+            })
+            .catch(error=>console.log(error))
+        },
         statusFunction(row){
             switch (row.status) {
                 case "0":
@@ -103,6 +137,14 @@ export default {
                     return "已归还";
                 default:
                     break;
+            }
+        },
+        userFunction(row){
+            const that =this;
+            for(var i=0;i<that.users.length;i++){
+                if(row.borrowingBy===that.users[i].userId){
+                    return that.users[i].userName;
+                }
             }
         },
         selectBookBorrowingRecords(){
@@ -129,12 +171,12 @@ export default {
         },
         edit(){
             editBookBorrowingRecord(this.form).then(response=>{
-                this.form= {}
-                this.isShow = false
                 this.selectBookBorrowingRecords();
+                this.form.borrowingRecordId ="",
+                this.isShow = false
             }).catch(
                 function (error) {
-                        console.log(error);
+                    console.log(error);
                 }
             )
         }
