@@ -162,14 +162,16 @@
       menuListFunction(){
         const that = this;
         let params = {};
-        getRoleMenuList(params)
-          .then(function (response) {
-            var menus = response.data;
-            that.menuList = menus;
-           })
-        .catch(function (error) {
-             console.log(error);
-       });
+        that.menuList = JSON.parse(sessionStorage.getItem('menuList'));
+      //   getRoleMenuList(params)
+      //     .then(function (response) {
+      //       var menus = response.data;
+      //       that.menuList = menus;
+      //       console.log(menus)
+      //      })
+      //   .catch(function (error) {
+      //        console.log(error);
+      //  });
 
       },
       handleOpen(key, keyPath) {

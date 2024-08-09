@@ -107,6 +107,7 @@ import {getRoleList,delRole,getMenuList,getRoleMenuIdList,addOrUpdateRole} from 
       selectMenuList(row){
         this.selectRoleId = row.roleId;
         const that =this;
+        that.defaultMenu =[]
         getMenuList({}).then(response=>{
           that.menuList = response.data;
           that.dialogFormVisible = true;

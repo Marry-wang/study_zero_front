@@ -103,12 +103,13 @@ export default{
         },
         getMenus(){
             const that = this;
-            getRoleMenuList({}).then(function (response) {
-                    that.menuList = response.data
-                })
-                .catch(function (error) {
-                    console.log(error);
-            });
+            that.menuList = JSON.parse(sessionStorage.getItem('menuList'));
+            // getRoleMenuList({}).then(function (response) {
+            //         that.menuList = response.data
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            // });
         },
         normalizer(node) {
             if (node.children && !node.children.length) {
