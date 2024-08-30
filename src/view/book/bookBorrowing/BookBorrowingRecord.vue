@@ -51,6 +51,18 @@
             </el-table-column>
         </el-table>
 
+        <div class="block">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-sizes="[10, 50, 100]"
+                :page-size=pageSize
+                layout="sizes, prev, pager, next"
+                :total=pageTotal>
+            </el-pagination>
+        </div>
+
 
         <el-dialog
             title="借阅信息"
@@ -104,7 +116,10 @@ export default {
                 "bookId":"",
                 "borrowingBy":"",
                 "borrowingRecordId":""
-            }
+            },
+            pageTotal:1000,
+            pageSize:10,
+            currentPage:1,
         }
     },
     mounted(){
@@ -148,8 +163,9 @@ export default {
             }
         },
         selectBookBorrowingRecords(){
-            selectBookBorrowingRecord({}).then(response=>{
-                this.tableData = response.data
+            selectBookBorrowingRecord({pageNum:this.currentPage,pageSize:this.pageSize}).then(response=>{
+                this.tableData = response.data.records;
+                this.pageTotal = response.data.total;
             })
         },
         handleUpdateClick(row){
@@ -179,6 +195,15 @@ export default {
                     console.log(error);
                 }
             )
+        },
+        handleSizeChange(val){
+            this.pageSize =val;
+            this.currentPage =1;
+            this.selectBookBorrowingRecords();
+        },
+        handleCurrentChange(val){
+            this.currentPage =val;
+            this.selectBookBorrowingRecords();
         }
     }
 }
