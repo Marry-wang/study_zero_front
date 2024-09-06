@@ -1,6 +1,6 @@
 <template>
     <div id="bookBorrowing">
-        <el-form :inline="true">
+        <!-- <el-form :inline="true">
             <el-form-item>
                 <el-button
                     icon="el-icon-plus"
@@ -10,9 +10,9 @@
                     添加
                 </el-button>
             </el-form-item>
-        </el-form>
+        </el-form> -->
 
-        <el-table
+        <!-- <el-table
             :data="tableData"
             border
             style="width: 100%">
@@ -62,7 +62,7 @@
                 :total=pageTotal>
             </el-pagination>
         </div>
-
+-->
 
         <el-dialog
             title="借阅信息"
@@ -99,7 +99,18 @@
                 <el-button @click="isShow = false">取 消</el-button>
                 <el-button @click="edit">确认</el-button>
             </div>
-        </el-dialog>
+        </el-dialog> 
+        <my-table
+            :columnArr.sync="tableColumn"
+            :myTableData="tableData"
+            :currentPage="currentPage"
+            :pageSize="pageSize"
+            :pageTotal="pageTotal"
+            @handleSizeChange="handleSizeChange"
+            @handleCurrentChange="handleCurrentChange"
+            @tableUpdate="returnBook"
+            @tableAdd="handleUpdateClick"
+        />
     </div>
 </template>
 <script>
@@ -117,6 +128,28 @@ export default {
                 "borrowingBy":"",
                 "borrowingRecordId":""
             },
+            tableColumn:[
+                {
+                    "prop":"bookName",
+                    "label":"图书名称"
+                },
+                {
+                    "prop":"borrowingTime",
+                    "label":"借阅时间"
+                },
+                {
+                    "prop":"returnTime",
+                    "label":"归还时间"
+                },
+                {
+                    "prop":"borrowingBy",
+                    "label":"借阅人"
+                },
+                {
+                    "prop":"status",
+                    "label":"状态"
+                }
+            ],
             pageTotal:1000,
             pageSize:10,
             currentPage:1,
@@ -169,15 +202,15 @@ export default {
             })
         },
         handleUpdateClick(row){
-            if(row === null|| row===""){
+            // if(row === null|| row===""){
                 this.form.bookId = ""
                 this.form.borrowingTime = ""
                 this.form.returnTime = ""
                 this.form.borrowingBy = ""
                 this.form.status = ""
-            }else{
-                this.form = row
-            }
+            // }else{
+            //     this.form = row
+            // }
             this.isShow = true;
         },
         returnBook(row){

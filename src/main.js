@@ -9,7 +9,9 @@ import locale from 'element-ui/lib/locale/lang/zh-CN'
 import axios from 'axios'
 import qs from 'qs'
 import './scss/index.css'
+import myTable from '@/components/table'
 
+Vue.component('my-table',myTable)
 Vue.config.productionTip = false
 Vue.use(ElementUI,{locale});
 Vue.prototype.$axios = axios 
