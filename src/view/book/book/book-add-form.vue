@@ -2,7 +2,7 @@
     <el-dialog
         :title="title"
         :visible.sync="dialogFormVisible"
-        width="20%"
+        width="40%"
     >
         <el-form ref="dataForm" :model="form" label-width="80px">
             <el-row>
@@ -29,6 +29,18 @@
                     <el-form-item label="图书编码" prop="bookCode">
                         <el-input v-model="form.bookCode" placeholder=""></el-input>
                     </el-form-item>
+                    <el-form-item label="图书照片" prop="bookImage">
+                        <el-upload
+                                action=""
+                                list-type="picture-card"
+                                :auto-upload="false"
+                                :on-change="upload"
+                                :on-remove="handleRemove"
+                                :file-list="fileList"
+                            >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                    </el-form-item>
                 </el-col>
             </el-row>
         </el-form>
@@ -40,6 +52,7 @@
 </template>
 <script>
 import {addBook,selectBookTypeSummary} from '@/api/book/book'
+import {uploadFile,viewUrl} from '@/api/file/file'
 export default{
     name:"BookAddForm",
     data(){
@@ -50,8 +63,10 @@ export default{
                 bookName:"",
                 press:"",
                 price:"",
-                bookCode:""
+                bookCode:"",
+                bookImageName:"",
             },
+            fileList:[],
             bookTypes:[],
             title:""
         }
@@ -77,7 +92,12 @@ export default{
                 addBook(this.form).then(function (response) {
                         that.form.bookName = null;
                         that.form.id = null;
+                        that.form.press = null;
+                        that.form.price = null;
+                        that.form.bookCode = null;
+                        that.form.bookImageName = null;
                         that.dialogFormVisible = false;
+                        that.fileList = [];
                         that.$emit('refreshDataList')
                     })
                     .catch(function (error) {
@@ -94,7 +114,29 @@ export default{
                 console.log(error);
             });
             
-        }
+        },
+        upload(file){
+            const that = this;
+            console.log(file)
+            let formData=new FormData();
+            formData.append('file',file.raw);
+            uploadFile(formData)
+            .then(
+                (res)=>{
+                    console.log(res)
+                    that.form.bookImageName = res.data
+                }
+                
+            )
+            .catch((error) =>
+                console.log(error)       
+            )
+        },
+        //移除文件
+        handleRemove(file, fileList) {
+            console.log(fileList)
+            this.fileList = fileList;
+        },
     }
 
 }

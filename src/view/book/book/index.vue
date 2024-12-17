@@ -40,7 +40,7 @@
         label="操作">
         <template slot-scope="scope">
           <el-button @click="handleUpdateClick('修改图书',scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="delType(scope.row)" type="text" size="small">删除</el-button>
+          <el-button @click="delBook(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -103,7 +103,7 @@ import {delBook,selectBook,selectBookTypeSummary} from '@/api/book/book'
       },
       delBook(row){
         const that =this;
-        delBook({"id":row.id})
+        delBook({"bookId":row.bookId})
         .then(response=>{
           that.getBooks()
         })

@@ -29,6 +29,9 @@
                     <el-form-item label="图书编码" prop="bookCode">
                         <el-input v-model="form.bookCode" placeholder=""></el-input>
                     </el-form-item>
+                    <el-form-item label="图书封面">
+                        <el-image :src="form.bookImageName" style="width: 100px;height: 100px;"></el-image>
+                    </el-form-item>
                 </el-col>
             </el-row>
         </el-form>
@@ -52,7 +55,8 @@ export default{
                 bookTypeName:"",
                 press:"",
                 price:"",
-                bookCode:""
+                bookCode:"",
+                bookImageName:"",
             },
             bookTypes:[],
             title:""
@@ -76,6 +80,7 @@ export default{
                 this.form.press = row.press;
                 this.form.price = row.price;
                 this.form.bookCode = row.bookCode;
+                this.form.bookImageName = row.bookImagePath;
             }
             this.selectBookType()
         },
