@@ -34,7 +34,7 @@
                                 action=""
                                 list-type="picture-card"
                                 :auto-upload="false"
-                                :on-change="upload"
+                                :on-change="uploadBookImage"
                                 :on-remove="handleRemove"
                                 :file-list="fileList"
                             >
@@ -52,7 +52,7 @@
 </template>
 <script>
 import {addBook,selectBookTypeSummary} from '@/api/book/book'
-import {uploadFile,viewUrl} from '@/api/file/file'
+import {uploadFile,viewUrl,delFile} from '@/api/file/file'
 export default{
     name:"BookAddForm",
     data(){
@@ -65,6 +65,7 @@ export default{
                 price:"",
                 bookCode:"",
                 bookImageName:"",
+                bookImagePath:"",
             },
             fileList:[],
             bookTypes:[],
@@ -115,28 +116,50 @@ export default{
             });
             
         },
-        upload(file){
+        uploadBookImage(file){
             const that = this;
-            console.log(file)
+            // console.log(file)
             let formData=new FormData();
             formData.append('file',file.raw);
             uploadFile(formData)
             .then(
                 (res)=>{
-                    console.log(res)
-                    that.form.bookImageName = res.data
+                    // console.log(res)
+                    that.form.bookImageName = res.data;
+                    that.getViewUrl(res.data);
                 }
                 
             )
             .catch((error) =>
                 console.log(error)       
             )
+            
         },
-        //移除文件
+        getViewUrl(fileName){
+            console.log(this.fileList)
+            const that = this;
+            viewUrl({'fileName':fileName})
+            .then(
+                (res)=>{
+                    // console.log(res)
+                    that.form.bookImagePath = res.data
+                }
+
+            )
+            .catch((error) =>
+                console.log(error)       
+            )
+        },
         handleRemove(file, fileList) {
+            delFile({'fileName':this.form.bookImageName}).then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
             console.log(fileList)
             this.fileList = fileList;
-        },
+        }
     }
 
 }

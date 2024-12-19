@@ -30,7 +30,16 @@
                         <el-input v-model="form.bookCode" placeholder=""></el-input>
                     </el-form-item>
                     <el-form-item label="图书封面">
-                        <el-image :src="form.bookImageName" style="width: 100px;height: 100px;"></el-image>
+                        <el-upload
+                                action=""
+                                list-type="picture-card"
+                                :auto-upload="false"
+                                :on-change="uploadBookImage"
+                                :on-remove="handleRemove"
+                                :file-list="fileList"
+                            >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -43,6 +52,7 @@
 </template>
 <script>
 import {editBook,selectBookTypeSummary} from '@/api/book/book'
+import {uploadFile,viewUrl,delFile} from '@/api/file/file'
 export default{
     name:"BookUpdateForm",
     data(){
@@ -57,17 +67,20 @@ export default{
                 price:"",
                 bookCode:"",
                 bookImageName:"",
+                bookImagePath:""
             },
             bookTypes:[],
-            title:""
+            title:"",
+            fileList:[]
         }
     },
     mounted(){
-
+        
     },
     methods:{
         init(title,row){
-            console.log(row)
+            console.log(row.bookImageName)
+            this.fileList =[]
             this.dialogFormVisible = true;
             this.title = title;
             if(row === null|| row===""){
@@ -80,16 +93,22 @@ export default{
                 this.form.press = row.press;
                 this.form.price = row.price;
                 this.form.bookCode = row.bookCode;
-                this.form.bookImageName = row.bookImagePath;
+                this.form.bookImageName = row.bookImageName;
+                this.form.bookImagePath = row.bookImagePath;
+                if(this.fileList.length ==0 & row.bookImageName != null ){
+                    this.fileList.push({name:row.bookImageName,url:row.bookImagePath})
+                }
+                
             }
             this.selectBookType()
         },
         update(){
-            console.log(this.form)
             this.$refs['dataForm'].validate((valid) => {
                 const that = this;
                 editBook(this.form).then(function (response) {
                         that.form.bookName = null;
+                        that.form.bookImageName = null;
+                        that.form.bookImagePath = null;
                         that.form.id = null;
                         that.dialogFormVisible = false;
                         that.$emit('refreshDataList')
@@ -108,6 +127,50 @@ export default{
                 console.log(error);
             });
             
+        },
+        uploadBookImage(file){
+            const that = this;
+            console.log(file)
+            let formData=new FormData();
+            formData.append('file',file.raw);
+            uploadFile(formData)
+            .then(
+                (res)=>{
+                    console.log(res)
+                    that.form.bookImageName = res.data;
+                    that.getViewUrl(res.data);
+                }
+                
+            )
+            .catch((error) =>
+                console.log(error)       
+            )
+            
+        },
+        getViewUrl(fileName){
+            const that = this;
+            viewUrl({'fileName':fileName})
+            .then(
+                (res)=>{
+                    console.log(res)
+                    that.form.bookImagePath = res.data
+                }
+
+            )
+            .catch((error) =>
+                console.log(error)       
+            )
+        },
+        handleRemove(file, fileList) {
+            console.log(this.form.bookImageName);
+            delFile({'fileName':this.form.bookImageName}).then(function (response) {
+                console.log(response)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            console.log(fileList)
+            this.fileList = fileList;
         }
 
     }
