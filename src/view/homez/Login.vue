@@ -38,7 +38,7 @@
 </template>
 <script>
 import {loginform} from '@/api/login/login';
-import {getRoleMenuList} from '@/api/login/system';
+import {getRoleMenuList,getUserList} from '@/api/login/system';
 export default {
     name:"login",
     data(){
@@ -81,13 +81,23 @@ export default {
             .then(function (response) {
               var menus = response.data;
               sessionStorage.setItem('menuList',JSON.stringify(menus));
-              //将路由跳转添加到这里，处理放在登录接口后又调用菜单接口的路由不跳转问题
-              that.$router.push('/home')
+              that.getUsers();
             })
             .catch(function (error) {
               console.log(error);
             });
 
+        },
+        getUsers(){
+            const that = this;
+            getUserList({})
+            .then(response=>{
+                console.log(response.data)
+                sessionStorage.setItem('userList',JSON.stringify(response.data));
+                //将路由跳转添加到这里，处理放在登录接口后又调用菜单接口的路由不跳转问题
+                that.$router.push('/home')
+            })
+            .catch(error=>console.log(error))
         },
 
     }

@@ -115,7 +115,6 @@
 </template>
 <script>
 import {selectBook,selectBookBorrowingRecord,editBookBorrowingRecord} from '@/api/book/book'
-import {getUserList} from '@/api/login/system'
 export default {
     data(){
         return{
@@ -162,12 +161,8 @@ export default {
     },
     methods:{
         getUsers(){
-            const that =this;
-            getUserList({})
-            .then(response=>{
-                that.users = response.data
-            })
-            .catch(error=>console.log(error))
+            this.users = JSON.parse(sessionStorage.getItem('userList'));
+            console.log(this.users);
         },
         getBooks(){
             const that =this;
@@ -178,26 +173,45 @@ export default {
             .catch(error=>console.log(error))
         },
         statusFunction(row){
-            switch (row.status) {
-                case "0":
-                   return  "未归还";
-                case "1":
-                    return "已归还";
-                default:
-                    break;
+            for(var i=0;i<row.length;i++){
+                if(row[i].status==="0"){
+                    row[i].status = "未归还"
+                }else if(row[i].status==="1"){
+                    row[i].status = "已归还";
+                }
             }
+            this.tableData = row;
+
+            // switch (row.status) {
+            //     case "0":
+            //        return  "未归还";
+            //     case "1":
+            //         return "已归还";
+            //     default:
+            //         break;
+            // }
         },
         userFunction(row){
             const that =this;
-            for(var i=0;i<that.users.length;i++){
-                if(row.borrowingBy===that.users[i].userId){
-                    return that.users[i].userName;
+            for(var z=0;z<row.length;z++){
+                for(var i=0;i<that.users.length;i++){
+                    if(row[z].borrowingBy===that.users[i].userId){
+                        row[z].borrowingBy= that.users[i].userName;
+                        break;
+                    }
                 }
             }
+            this.tableData = row;
         },
         selectBookBorrowingRecords(){
             selectBookBorrowingRecord({pageNum:this.currentPage,pageSize:this.pageSize}).then(response=>{
-                this.tableData = response.data.records;
+                
+                if(response.data.records.length != 0){
+                    this.statusFunction(response.data.records);
+                    this.userFunction(response.data.records);
+                }else{
+                    this.tableData = response.data.records;
+                }
                 this.pageTotal = response.data.total;
             })
         },
