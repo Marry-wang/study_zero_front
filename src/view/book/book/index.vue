@@ -1,5 +1,12 @@
 <template>
   <div>
+    <!-- <el-button
+                icon="el-icon-plus"
+                type="primary"
+                @click="handleAddClick"
+            >
+                添加
+            </el-button>
     <el-form :inline="true">
         <el-form-item>
             <el-button
@@ -43,7 +50,7 @@
           <el-button @click="delBook(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table>-->
 
     <book-add-form
     v-show="addShow"
@@ -57,7 +64,22 @@
     ref="update"
     @refreshDataList="getBooks"
     >
-    </book-update-form>
+    </book-update-form> 
+    <my-table
+        :columnArr.sync="tableColumn"
+        :myTableData="tableData"
+        :currentPage="currentPage"
+        :pageSize="pageSize"
+        :pageTotal="pageTotal"
+        :tableUpdateMsg="tableUpdateMsg"
+        :tableDelMsg="tableDelMsg"
+        :tableDelShow="true"
+        @handleSizeChange="handleSizeChange"
+        @handleCurrentChange="handleCurrentChange"
+        @tableUpdate="handleUpdateClick"
+        @tableAdd="handleAddClick"
+        @tableDel="delBook"
+    />
   </div>
 </template>
 
@@ -73,7 +95,34 @@ import {delBook,selectBook,selectBookTypeSummary} from '@/api/book/book'
         addShow:false,
         updateShow:false,
         dialogFormVisible:false,
-        bookTypes:[]
+        bookTypes:[],
+        tableColumn:[
+            {
+                "prop":"bookName",
+                "label":"图书名称"
+            },
+            {
+                "prop":"bookTypeName",
+                "label":"图书类别"
+            },
+            {
+                "prop":"press",
+                "label":"出版社"
+            },
+            {
+                "prop":"price",
+                "label":"价格"
+            },
+            {
+                "prop":"bookCode",
+                "label":"图书编码"
+            }
+        ],
+        pageTotal:1000,
+        pageSize:10,
+        currentPage:1,
+        tableUpdateMsg:'编辑',
+        tableDelMsg:'删除'
       }
     },
     mounted(){
@@ -81,23 +130,24 @@ import {delBook,selectBook,selectBookTypeSummary} from '@/api/book/book'
       this.selectBookType();
     },
     methods: {
-      handleAddClick(menuTitle,row) {
+      handleAddClick() {
         this.addShow = true;
         this.$nextTick(() => {
-            this.$refs.add.init(menuTitle,row)
+            this.$refs.add.init("添加图书","")
         })
       },
-      handleUpdateClick(menuTitle,row) {
+      handleUpdateClick(row) {
         this.updateShow = true;
         this.$nextTick(() => {
-            this.$refs.update.init(menuTitle,row)
+            this.$refs.update.init("修改图书",row)
         })
       },
       getBooks(){
         const that =this;
-        selectBook({})
+        selectBook({pageNum:this.currentPage,pageSize:this.pageSize})
         .then(response=>{
-          that.tableData = response.data
+          that.tableData = response.data.records
+          that.pageTotal = response.data.total;
         })
         .catch(error=>console.log(error))
       },
@@ -110,15 +160,24 @@ import {delBook,selectBook,selectBookTypeSummary} from '@/api/book/book'
         .catch(error=>console.log(error))
       },
       selectBookType(){
-            const that = this;
-            selectBookTypeSummary({}).then(function (response) {
-                that.bookTypes = response.data;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            
-        }
+          const that = this;
+          selectBookTypeSummary({}).then(function (response) {
+              that.bookTypes = response.data;
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+          
+      },
+      handleSizeChange(val){
+        this.pageSize =val;
+        this.currentPage =1;
+        this.getBooks();
+      },
+      handleCurrentChange(val){
+          this.currentPage =val;
+          this.getBooks();
+      }
     },
   }
 </script>

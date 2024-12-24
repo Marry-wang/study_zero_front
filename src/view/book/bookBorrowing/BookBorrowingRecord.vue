@@ -168,7 +168,7 @@ export default {
             const that =this;
             selectBook({})
             .then(response=>{
-                that.books = response.data
+                that.books = response.data.records
             })
             .catch(error=>console.log(error))
         },

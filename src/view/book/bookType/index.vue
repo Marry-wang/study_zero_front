@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :inline="true">
+    <!-- <el-form :inline="true">
         <el-form-item>
             <el-button
                 icon="el-icon-plus"
@@ -27,7 +27,7 @@
           <el-button @click="delType(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table> -->
 
     <bookType-add-form
     v-show="addShow"
@@ -42,6 +42,22 @@
     @refreshDataList="getTypes"
     >
     </bookType-update-form>
+
+    <my-table
+        :columnArr.sync="tableColumn"
+        :myTableData="tableData"
+        :currentPage="currentPage"
+        :pageSize="pageSize"
+        :pageTotal="pageTotal"
+        :tableUpdateMsg="tableUpdateMsg"
+        :tableDelMsg="tableDelMsg"
+        :tableDelShow="true"
+        @handleSizeChange="handleSizeChange"
+        @handleCurrentChange="handleCurrentChange"
+        @tableUpdate="handleUpdateClick"
+        @tableAdd="handleAddClick"
+        @tableDel="delType"
+    />
   </div>
 </template>
 
@@ -61,29 +77,41 @@ import {delBookTypeSummary,selectBookTypeSummary} from '@/api/book/book'
           id:'id',
           label:'bookTypeName',
         },
+        tableColumn:[
+            {
+                "prop":"bookTypeName",
+                "label":"图书类别"
+            }
+        ],
+        pageTotal:1000,
+        pageSize:10,
+        currentPage:1,
+        tableUpdateMsg:'编辑',
+        tableDelMsg:'删除'
       }
     },
     mounted(){
       this.getTypes();
     },
     methods: {
-      handleAddClick(menuTitle,row) {
+      handleAddClick() {
         this.addShow = true;
         this.$nextTick(() => {
-            this.$refs.add.init(menuTitle,row)
+            this.$refs.add.init('添加类别','')
         })
       },
-      handleUpdateClick(menuTitle,row) {
+      handleUpdateClick(row) {
         this.updateShow = true;
         this.$nextTick(() => {
-            this.$refs.update.init(menuTitle,row)
+            this.$refs.update.init("更新类别",row)
         })
       },
       getTypes(){
         const that =this;
-        selectBookTypeSummary({})
+        selectBookTypeSummary({pageNum:this.currentPage,pageSize:this.pageSize})
         .then(response=>{
-          that.tableData = response.data
+          that.tableData = response.data.records
+          that.pageTotal = response.data.total;
         })
         .catch(error=>console.log(error))
       },
@@ -94,6 +122,15 @@ import {delBookTypeSummary,selectBookTypeSummary} from '@/api/book/book'
           that.getTypes()
         })
         .catch(error=>console.log(error))
+      },
+      handleSizeChange(val){
+        this.pageSize =val;
+        this.currentPage =1;
+        this.getTypes();
+      },
+      handleCurrentChange(val){
+          this.currentPage =val;
+          this.getTypes();
       }
     },
   }

@@ -109,7 +109,7 @@ export default{
         selectBookType(){
             const that = this;
             selectBookTypeSummary({}).then(function (response) {
-                that.bookTypes = response.data;
+                that.bookTypes = response.data.records;
             })
             .catch(function (error) {
                 console.log(error);
