@@ -87,7 +87,7 @@ export default{
                 this.form.menuName = "";
                 this.form.icon = "";
                 this.form.path = "";
-                this.form.parentId = "";
+                this.form.parentId = null;
                 this.form.component =""
             }else{
                 this.form.id = row.id;
