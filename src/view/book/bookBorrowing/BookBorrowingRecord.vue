@@ -142,11 +142,11 @@ export default {
                     "label":"归还时间"
                 },
                 {
-                    "prop":"borrowingBy",
+                    "prop":"borrowingByName",
                     "label":"借阅人"
                 },
                 {
-                    "prop":"status",
+                    "prop":"statusName",
                     "label":"状态"
                 }
             ],
@@ -177,9 +177,9 @@ export default {
         statusFunction(row){
             for(var i=0;i<row.length;i++){
                 if(row[i].status==="0"){
-                    row[i].status = "未归还"
+                    row[i].statusName = "未归还"
                 }else if(row[i].status==="1"){
-                    row[i].status = "已归还";
+                    row[i].statusName = "已归还";
                 }
             }
             this.tableData = row;
@@ -198,7 +198,7 @@ export default {
             for(var z=0;z<row.length;z++){
                 for(var i=0;i<that.users.length;i++){
                     if(row[z].borrowingBy===that.users[i].userId){
-                        row[z].borrowingBy= that.users[i].userName;
+                        row[z].borrowingByName= that.users[i].userName;
                         break;
                     }
                 }
