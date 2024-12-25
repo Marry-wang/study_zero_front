@@ -109,7 +109,7 @@ export default{
                         that.form.bookName = null;
                         that.form.bookImageName = null;
                         that.form.bookImagePath = null;
-                        that.form.id = null;
+                        that.form.bookId = null;
                         that.dialogFormVisible = false;
                         that.$emit('refreshDataList')
                     })
@@ -121,7 +121,7 @@ export default{
         selectBookType(){
             const that = this;
             selectBookTypeSummary({}).then(function (response) {
-                that.bookTypes = response.data;
+                that.bookTypes = response.data.records;
             })
             .catch(function (error) {
                 console.log(error);

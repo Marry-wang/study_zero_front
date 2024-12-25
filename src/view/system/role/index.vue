@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :inline="true">
+    <!-- <el-form :inline="true">
         <el-form-item>
             <el-button
                 icon="el-icon-plus"
@@ -28,7 +28,7 @@
           <el-button @click="delRole(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table> -->
 
     <role-form
     v-show="show"
@@ -54,6 +54,25 @@
       </el-tree>
       <el-button @click="saveRoleMenus" type="text" size="small">保存</el-button>
     </el-dialog>
+
+    <my-table
+      :columnArr.sync="tableColumn"
+      :myTableData="tableData"
+      :currentPage="currentPage"
+      :pageSize="pageSize"
+      :pageTotal="pageTotal"
+      :tableUpdateMsg="tableUpdateMsg"
+      :tableDelMsg="tableDelMsg"
+      :changeMsg="changeMsg"
+      :changeShow="changeShow"
+      :tableDelShow="true"
+      @handleSizeChange="handleSizeChange"
+      @handleCurrentChange="handleCurrentChange"
+      @tableUpdate="handleClick"
+      @tableAdd="handleClick"
+      @tableDel="delRole"
+      @change="selectMenuList"
+    />
   </div>
 </template>
 
@@ -75,24 +94,38 @@ import {getRoleList,delRole,getMenuList,getRoleMenuIdList,addOrUpdateRole} from 
           children:'children'
         },
         selectRoleId:"",
-        selectMenus:[]
+        selectMenus:[],
+        tableColumn:[
+            {
+                "prop":"roleName",
+                "label":"角色"
+            },
+        ],
+        pageTotal:1000,
+        pageSize:10,
+        currentPage:1,
+        tableUpdateMsg:'编辑',
+        tableDelMsg:'删除',
+        changeMsg:'权限',
+        changeShow:true
       }
     },
     mounted(){
       this.getRoles()
     },
     methods: {
-      handleClick(menuTitle,row) {
+      handleClick(row) {
         this.show = true;
         this.$nextTick(() => {
-            this.$refs.addOrUpdate.init(menuTitle,row)
+            this.$refs.addOrUpdate.init(row)
         })
       },
       getRoles(){
         const that =this;
-        getRoleList({})
+        getRoleList({pageNum:this.currentPage,pageSize:this.pageSize})
         .then(response=>{
-          that.tableData = response.data
+          that.tableData = response.data.records;
+          that.pageTotal = response.data.total;
         })
         .catch(error=>console.log(error))
       },
@@ -126,6 +159,15 @@ import {getRoleList,delRole,getMenuList,getRoleMenuIdList,addOrUpdateRole} from 
             .catch(function (error) {
                 console.log(error);
         });
+      },
+      handleSizeChange(val){
+        this.pageSize =val;
+        this.currentPage =1;
+        this.getRoles();
+      },
+      handleCurrentChange(val){
+          this.currentPage =val;
+          this.getRoles();
       }
     },
   }

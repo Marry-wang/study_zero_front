@@ -90,10 +90,10 @@ export default {
         },
         getUsers(){
             const that = this;
-            getUserList({})
+            getUserList({pageNum:1,pageSize:10000})
             .then(response=>{
                 console.log(response.data)
-                sessionStorage.setItem('userList',JSON.stringify(response.data));
+                sessionStorage.setItem('userList',JSON.stringify(response.data.records));
                 //将路由跳转添加到这里，处理放在登录接口后又调用菜单接口的路由不跳转问题
                 that.$router.push('/home')
             })

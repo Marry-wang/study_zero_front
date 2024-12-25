@@ -37,14 +37,16 @@ export default{
 
     },
     methods:{
-        init(menuTitle,row){
+        init(row){
             this.dialogFormVisible = true;
-            this.menuTitle = menuTitle;
-            if(row === null|| row===""){
-                this.form.roleName = ""
+            if(row === ""|| row===null){
+                this.form.roleName = "";
+                this.form.id ="";
+                this.menuTitle = '添加角色';
             }else{
                 this.form.roleName = row.roleName;
-                this.form.id = row.roleId
+                this.form.id = row.roleId;
+                this.menuTitle = '修改角色';
             }
         },
         addOrUpdate(){

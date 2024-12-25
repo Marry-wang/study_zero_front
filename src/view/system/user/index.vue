@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :inline="true">
+    <!-- <el-form :inline="true">
         <el-form-item>
             <el-button
                 icon="el-icon-plus"
@@ -28,7 +28,7 @@
           <el-button @click="delUser(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table> -->
 
     <user-form
     v-show="show"
@@ -52,6 +52,25 @@
     </el-select>
     <el-button @click="saveUserRoles" type="text" size="small">保存</el-button>
     </el-dialog>
+
+    <my-table
+      :columnArr.sync="tableColumn"
+      :myTableData="tableData"
+      :currentPage="currentPage"
+      :pageSize="pageSize"
+      :pageTotal="pageTotal"
+      :tableUpdateMsg="tableUpdateMsg"
+      :tableDelMsg="tableDelMsg"
+      :changeMsg="changeMsg"
+      :changeShow="changeUserRoleShow"
+      :tableDelShow="true"
+      @handleSizeChange="handleSizeChange"
+      @handleCurrentChange="handleCurrentChange"
+      @tableUpdate="handleClick"
+      @tableAdd="handleClick"
+      @tableDel="delUser"
+      @change="changeUserRole"
+    />
   </div>
 </template>
 
@@ -67,24 +86,38 @@ import {getUserList,delUser,getRoleList,selectUserRole,addOrUpdateUser} from '@/
         dialogFormVisible:false,
         userRoles:[],
         roles:[],
-        selectUserId:""
+        selectUserId:"",
+        tableColumn:[
+            {
+                "prop":"userName",
+                "label":"姓名"
+            },
+        ],
+        pageTotal:1000,
+        pageSize:10,
+        currentPage:1,
+        tableUpdateMsg:'编辑',
+        tableDelMsg:'删除',
+        changeMsg:'角色',
+        changeUserRoleShow:true
       }
     },
     mounted(){
       this.getUsers()
     },
     methods: {
-      handleClick(menuTitle,row) {
+      handleClick(row) {
         this.show = true;
         this.$nextTick(() => {
-            this.$refs.addOrUpdate.init(menuTitle,row)
+            this.$refs.addOrUpdate.init(row)
         })
       },
       getUsers(){
         const that =this;
-        getUserList({})
+        getUserList({pageNum:this.currentPage,pageSize:this.pageSize})
         .then(response=>{
-          that.tableData = response.data
+          that.tableData = response.data.records;
+          that.pageTotal = response.data.total;
         })
         .catch(error=>console.log(error))
       },
@@ -101,7 +134,7 @@ import {getUserList,delUser,getRoleList,selectUserRole,addOrUpdateUser} from '@/
         this.selectUserId =row.userId;
         getRoleList({})
         .then(response=>{
-          that.roles = response.data
+          that.roles = response.data.records
         })
         .catch(error=>console.log(error))
         
@@ -116,6 +149,15 @@ import {getUserList,delUser,getRoleList,selectUserRole,addOrUpdateUser} from '@/
         addOrUpdateUser({"userId":this.selectUserId,"roleIdList":this.userRoles})
         .then(response=>{this.dialogFormVisible = false;})
         .catch(error=>console.log(error))
+      },
+      handleSizeChange(val){
+        this.pageSize =val;
+        this.currentPage =1;
+        this.getUsers();
+      },
+      handleCurrentChange(val){
+          this.currentPage =val;
+          this.getUsers();
       }
     },
   }

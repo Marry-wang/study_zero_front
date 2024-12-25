@@ -19,6 +19,7 @@
                     label="操作">
                     <template slot-scope="scope">
                         <el-button  :disabled="scope.row.status==='1'" @click="tableUpdate(scope.row)" type="text" size="small">{{ tableUpdateMsg }}</el-button>
+                        <el-button  v-if="changeShow" @click="change(scope.row)" type="text" size="small">{{ changeMsg }}</el-button>
                         <el-button  v-if="tableDelShow" @click="tableDel(scope.row)" type="text" size="small">{{ tableDelMsg }}</el-button>
                     </template>
                 </el-table-column>
@@ -65,9 +66,17 @@ export default{
             type:Boolean,
             default:()=>false
         },
+        changeShow:{
+            type:Boolean,
+            default:()=>false
+        },
         tableDelMsg:{
             type:String,
             default:()=>'删除'
+        },
+        changeMsg:{
+            type:String,
+            default:()=>'权限'
         },
         tableUpdateMsg:{
             type:String,
@@ -92,10 +101,13 @@ export default{
             this.$emit('tableUpdate',row)
         },
         tableAdd(){
-            this.$emit('tableAdd')
+            this.$emit('tableAdd','')
         },
         tableDel(row){
             this.$emit('tableDel',row)
+        },
+        change(row){
+            this.$emit('change',row)
         }
     }
 }

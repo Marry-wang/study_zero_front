@@ -38,14 +38,16 @@ export default{
 
     },
     methods:{
-        init(menuTitle,row){
+        init(row){
             this.dialogFormVisible = true;
-            this.menuTitle = menuTitle;
             if(row === null|| row===""){
                 this.form.userName = ""
+                this.form.userId =""
+                this.menuTitle ="新增用户"
             }else{
                 this.form.userName = row.userName;
                 this.form.userId = row.userId
+                this.menuTitle ="更新用户"
             }
         },
         addOrUpdate(){

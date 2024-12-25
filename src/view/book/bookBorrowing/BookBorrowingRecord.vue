@@ -106,6 +106,7 @@
             :currentPage="currentPage"
             :pageSize="pageSize"
             :pageTotal="pageTotal"
+            :tableUpdateMsg="tableUpdateMsg"
             @handleSizeChange="handleSizeChange"
             @handleCurrentChange="handleCurrentChange"
             @tableUpdate="returnBook"
@@ -152,6 +153,7 @@ export default {
             pageTotal:1000,
             pageSize:10,
             currentPage:1,
+            tableUpdateMsg:"归还"
         }
     },
     mounted(){
