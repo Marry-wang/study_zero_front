@@ -1,35 +1,5 @@
 <template>
   <div>
-    <!-- <el-form :inline="true">
-        <el-form-item>
-            <el-button
-                icon="el-icon-plus"
-                type="primary"
-                @click="handleClick('添加角色','')"
-            >
-                添加
-            </el-button>
-        </el-form-item>
-    </el-form>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        prop="roleName"
-        label="角色">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button @click="handleClick('修改角色信息',scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="selectMenuList(scope.row)" type="text" size="small">权限</el-button>
-          <el-button @click="delRole(scope.row)" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table> -->
-
     <role-form
     v-show="show"
     ref="addOrUpdate"

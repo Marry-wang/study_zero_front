@@ -1,57 +1,5 @@
 <template>
   <div>
-    <!-- <el-button
-                icon="el-icon-plus"
-                type="primary"
-                @click="handleAddClick"
-            >
-                添加
-            </el-button>
-    <el-form :inline="true">
-        <el-form-item>
-            <el-button
-                icon="el-icon-plus"
-                type="primary"
-                @click="handleAddClick('添加图书','')"
-            >
-                添加
-            </el-button>
-        </el-form-item>
-    </el-form>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        prop="bookName"
-        label="图书名称">
-      </el-table-column>
-      <el-table-column
-        prop="bookTypeName"
-        label="图书类别">
-      </el-table-column>
-      <el-table-column
-        prop="press"
-        label="出版社">
-      </el-table-column>
-      <el-table-column
-        prop="price"
-        label="价格">
-      </el-table-column>
-      <el-table-column
-        prop="bookCode"
-        label="图书编码">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button @click="handleUpdateClick('修改图书',scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="delBook(scope.row)" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>-->
-
     <book-add-form
     v-show="addShow"
     ref="add"

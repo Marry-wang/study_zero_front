@@ -1,35 +1,5 @@
 <template>
   <div>
-    <!-- <el-form :inline="true">
-        <el-form-item>
-            <el-button
-                icon="el-icon-plus"
-                type="primary"
-                @click="handleClick('添加用户','')"
-            >
-                添加
-            </el-button>
-        </el-form-item>
-    </el-form>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        prop="userName"
-        label="姓名">
-      </el-table-column>
-      <el-table-column
-        fixed="right"
-        label="操作">
-        <template slot-scope="scope">
-          <el-button @click="handleClick('修改用户信息',scope.row)" type="text" size="small">编辑</el-button>
-          <el-button @click="changeUserRole(scope.row)" type="text" size="small">授权</el-button>
-          <el-button @click="delUser(scope.row)" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table> -->
-
     <user-form
     v-show="show"
     ref="addOrUpdate"
