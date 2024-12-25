@@ -41,7 +41,7 @@
                     <i :class="menu.icon"></i>
                     <span>{{menu.menuName}}</span>
                   </template>
-                  <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs" >
+                  <el-menu-item :index="menuC.path"  v-for="(menuC,indexs) in menu.children" :key="indexs"  @click="addTab(menuC)" >
                     <i :class="menuC.icon"></i>
                     {{menuC.menuName}}
                   </el-menu-item>
@@ -55,17 +55,17 @@
         <el-container>
           <!-- 控制展示屏的大小 -->
           <div style="width:100%;height: 100%;margin: 0">
-            <!-- <el-tabs v-model="TabsValue" type="border-card" closable
-            @tab-remove="removeTab"
-            @tab-click="clickTab"
+            <el-tabs type="border-card" v-model="tableName" closable
+              @tab-remove="removeTab"
+              @tab-click="clickTab"
             >
               <el-tab-pane v-for="item in Tabs"
-              :key="item.name"
-              :label="item.title"
-              :name="item.name"
+              :key="item.menuName"
+              :label="item.menuName"
+              :name="item.path"
               >
               </el-tab-pane>
-            </el-tabs> -->
+            </el-tabs>
           <!-- 主要容器区域 -->
 
             <el-main>
@@ -87,7 +87,11 @@
         logo,
         name:'',
         TabsValue:'',
-        Tabs:[],
+        tableName:'首页',
+        Tabs:[{
+          "menuName":'首页',
+          "path":'/home',
+        }],
         menuList:[
           // {
           //   menuName:'第一级',
@@ -137,6 +141,7 @@
     mounted(){
       this.menuListFunction();
       this.getUserName();
+      this.checkRouter();
     },
     methods: {
       logOut(){
@@ -180,6 +185,56 @@
       handleClose(key, keyPath) {
         // console.log(key, keyPath);
       },
+      addTab(row){
+        console.log(row)
+        let tabNum =0;
+        for( let i = 0; i< this.Tabs.length;i++) { 
+          if(this.Tabs[i].path ==row.path ){
+              tabNum=tabNum+1;
+          }
+        }
+        if(tabNum ==0){
+          this.Tabs.push(row);
+          this.tableName = row.path;
+        }
+      },
+      clickTab(row){
+        console.log(row._props.name)
+        this.Tabs.forEach((tab, index) => {
+          if (tab.path === row._props.name) {
+            this.$router.push({path: tab.path})
+          }
+        });
+      },
+      checkRouter(){
+        if(this.Tabs.length ==1){
+          this.$router.push({path: this.Tabs[0].path})
+        }
+      },
+      enableClosable(row){
+        console.log(row)
+      },
+      removeTab(path) {
+        console.log(path)
+        if(path !='/home'){
+          let tabs = this.Tabs;
+          
+          tabs.forEach((tab, index) => {
+            if (tab.path === path) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+
+                this.Tabs = tabs.filter(tab => tab.path !== path);
+                this.tableName = nextTab.path;
+                this.$router.push({path: nextTab.path})
+              }
+            }
+          });
+        }else if(path ==='/home'){
+
+        }
+        
+      }
     },
   };
 </script>
