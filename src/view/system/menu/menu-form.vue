@@ -40,6 +40,13 @@
                 </el-form-item>
             </el-col>
           </el-row>
+          <el-row>
+            <el-col :span="24">
+                <el-form-item label="地址" prop="component">
+                    <el-input v-model="form.component" placeholder=""></el-input>
+                </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -62,7 +69,9 @@ export default{
                 id:"",
                 menuName:"",
                 icon:"",
-                path:""
+                path:"",
+                parentId:"",
+                component:""
             },
             menuTitle:"",
         }
@@ -78,12 +87,15 @@ export default{
                 this.form.menuName = "";
                 this.form.icon = "";
                 this.form.path = "";
+                this.form.parentId = "";
+                this.form.component =""
             }else{
                 this.form.id = row.id;
                 this.form.menuName = row.menuName;
                 this.form.icon = row.icon;
                 this.form.path = row.path;
                 this.form.parentId = row.parentId;
+                this.form.component = row.component;
             }
             this.menuTitle = menuTitle;
             this.menuList = menuList;

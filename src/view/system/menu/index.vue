@@ -5,6 +5,7 @@
                 <el-button
                     icon="el-icon-plus"
                     type="primary"
+                    style="position: relative; top: 10px;left: 10px;"
                     @click="handleClick('添加菜单','')"
                 >
                     添加
@@ -30,6 +31,11 @@
             <el-table-column
                 prop="path"
                 label="路径"
+                sortable>
+            </el-table-column>
+            <el-table-column
+                prop="component"
+                label="地址"
                 sortable>
             </el-table-column>
             <el-table-column

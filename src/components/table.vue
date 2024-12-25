@@ -11,7 +11,7 @@
         </div>
         
         <div style="position: relative;top: 10px; ">
-            <el-table :data="myTableData" style="width: 100%">
+            <el-table :data="myTableData" stripe border style="width: 100%">
                 <el-table-column v-for="(item,index) in columnArr" :key="index" :prop="item.prop" :label="item.label" :width="item.width">
                 </el-table-column>
                 <el-table-column
@@ -121,5 +121,7 @@ export default{
 .add-button {
   position: relative;
   top: 10px;
+  left:10px;
+  margin-bottom: 20px; 
 }
 </style>
