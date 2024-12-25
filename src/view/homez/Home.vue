@@ -199,7 +199,8 @@
   .el-main{
     height: 100%;
     width: 100%;
-    padding:0
+    padding:0;
+    overflow:visible;
   }
   .router-view-style{
     height: 100%;
