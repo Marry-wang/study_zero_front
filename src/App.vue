@@ -18,6 +18,11 @@ html{
 }
 body{
   margin: 0px;
+  width: 100%;
+  height: 100%;
+}
+.el-container.is-vertical{
+  height: 100%;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -26,6 +31,8 @@ body{
   /* text-align: center; */
   color: #2c3e50;
   margin-top: 0px;
+  height: 100%;
+  width: 100%;
   /* background-image: 
     linear-gradient(
       to left bottom, 

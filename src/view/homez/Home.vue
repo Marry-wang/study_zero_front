@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <!-- 外层容器 -->
-    <el-container style="height:100vh; border: 0px solid #eee">
+    <el-container style=" border: 0px solid #eee">
       <!-- 顶栏容器 -->
       <el-header>
         <div style="float: right; font-size: 14px">
@@ -18,7 +18,7 @@
 
       <el-container>
         <!-- 侧边栏容器 -->
-        <el-aside width="200px"  style="background-color: rgb(238, 241, 246);overflow:hidden">
+        <el-aside width="200px"  style="background-color: rgb(238, 241, 246);">
 
           <el-menu
             :default-active="this.$route.path"
@@ -55,7 +55,7 @@
         <el-container>
           <!-- 控制展示屏的大小 -->
           <div style="width:100%;height: 100%;margin: 0">
-            <el-tabs type="border-card" v-model="tableName" closable
+            <el-tabs type="border-card" v-model="tableName" 
               @tab-remove="removeTab"
               @tab-click="clickTab"
             >
@@ -63,6 +63,7 @@
               :key="item.menuName"
               :label="item.menuName"
               :name="item.path"
+              :closable="item.path !== '/home'"
               >
               </el-tab-pane>
             </el-tabs>
@@ -240,6 +241,10 @@
 </script>
 
 <style scoped>
+  #home{
+    height: 100%;
+    width: 100%;
+  }
   .el-header {
     background-color: #B3C0D1;
     color: #333;
@@ -252,13 +257,13 @@
     color: #333;
   }
   .el-main{
-    height: 100%;
+    height: 95%;
     width: 100%;
     padding:0;
-    overflow:visible;
+    overflow: visible;
   }
   .router-view-style{
-    height: 100%;
+    height: inherit;
     width: 100%;
-  }
+  } 
 </style>
